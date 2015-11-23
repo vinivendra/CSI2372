@@ -11,8 +11,8 @@ using namespace std;
 enum class Orientation { UP, DOWN };
 
 enum class EvenOdd { EVEN=0, ODD=1, DEFAULT };
-
-enum class Animal { BEAR, DEER, HARE, MOOSE, WOLF };
+//I added ALL for the case of the start card which can be any animal
+enum class Animal { BEAR, DEER, HARE, MOOSE, WOLF,ALL };
 
 char charForAnimal(Animal animal);
 

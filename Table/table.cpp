@@ -7,7 +7,7 @@ Table::Table() {
 }
 
 //Adding a card to the table
-int Table::addAt(std::shared_ptr<SplitFour> card, int row, int col) {
+int Table::addAt(std::shared_ptr<AnimalCard> card, int row, int col) {
 
 	//Used once we will have a startCard class to start the game
 	/*if (board[row][col] != 0) return 0;
@@ -24,7 +24,7 @@ int Table::addAt(std::shared_ptr<SplitFour> card, int row, int col) {
 	return 0;
 }
 //returning the number of card that match the given one
-int Table::nbMatches(std::shared_ptr<SplitFour> card, int row, int col) {
+int Table::nbMatches(std::shared_ptr<AnimalCard> card, int row, int col) {
 	int m = 0;
 	if (row-1>=0 && board[row - 1][col] == 1) {
 		if (cardBoard[row - 1][col]->getAnimal(2) == cardBoard[row][col]->getAnimal(0) || cardBoard[row - 1][col]->getAnimal(3) == cardBoard[row][col]->getAnimal(1))
@@ -45,6 +45,7 @@ int Table::nbMatches(std::shared_ptr<SplitFour> card, int row, int col) {
 	return m;
 }
 
+//Printing the table
 void Table::print() {
 
 	int minCol = 102, minRow = 102, maxRow = 0, maxCol = 0;
@@ -72,6 +73,7 @@ void Table::print() {
 			}
 		}
 	}
+	//Calculating the limit for the display screen
 	if (minCol != 0)
 		minCol--;
 	if (maxCol != 102)

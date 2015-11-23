@@ -2,9 +2,9 @@
 
 #include <iostream>
 
-#include "animalCard.h"
-#include "splitFour.h"
-#include "table.h"
+#include "AnimalCard/animalCard.h"
+#include "AnimalCard/splitFour.h"
+#include "Table/table.h"
 
 
 using namespace std;
@@ -24,7 +24,7 @@ int main(int argc, const char *argv[]) {
 
 	Table* testTable = new Table();
 
-	std::shared_ptr<SplitFour> cardToAdd(new SplitFour(animals));
+	std::shared_ptr<AnimalCard> cardToAdd((AnimalCard*)new SplitFour(animals));
 
 	testTable->addAt(cardToAdd, 52, 52);
 
