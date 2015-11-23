@@ -5,10 +5,7 @@
 #include "animalCard.h"
 
 
-class SplitFour : AnimalCard {
-	EvenOdd row;
-	Orientation orientation;
-	Animal animals[2][2];
+class NoSplit : AnimalCard {
 
 protected:
 	virtual void print(ostream& o) const;
@@ -19,8 +16,7 @@ public:
 	virtual EvenOdd getRow();
 	virtual void printRow(EvenOdd);
 
-	virtual Animal getAnimal(int);
-	SplitFour(Animal[2][2]);
+	NoSplit(Animal);
 };
 
 

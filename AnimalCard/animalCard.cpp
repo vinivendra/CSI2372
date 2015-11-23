@@ -25,3 +25,9 @@ char charForAnimal(Animal animal) {
         break;
     }
 }
+
+AnimalCard::AnimalCard() :row(EvenOdd::EVEN), orientation(Orientation::UP) {};
+
+Animal AnimalCard::getAnimal(int i) {
+	return animals[i / 2][i % 2];
+}
