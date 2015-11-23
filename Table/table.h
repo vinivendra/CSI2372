@@ -1,18 +1,17 @@
-#ifndef table_hpp
-#define table_hpp
-
+#ifndef table_h
+#define table_h
 
 #include "../AnimalCard/animalCard.h"
 #include <memory>
 
+
 class Table {
 
 	std::shared_ptr<AnimalCard> cardBoard[103][103];
-	char board[103][103];
 
 public:
 	Table();
-	int nbMatches(std::shared_ptr<AnimalCard>, int, int);
+	int nbMatches(int, int);
 	int addAt(std::shared_ptr<AnimalCard>, int row, int col);
 	//Table& operator+=(std::shared_ptr<ActionCard>);
 	//Table& operator-=(std::shared_ptr<ActionCard>);

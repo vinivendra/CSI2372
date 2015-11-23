@@ -1,7 +1,5 @@
-
-
-#ifndef SplitFour_hpp
-#define SplitFour_hpp
+#ifndef splitFour_h
+#define splitFour_h
 
 
 #include "animalCard.h"
@@ -21,7 +19,7 @@ public:
     virtual EvenOdd getRow();
     virtual void printRow(EvenOdd);
 
-	virtual Animal getAnimal(int);
+	Animal getAnimal(int);
     SplitFour(Animal[2][2]);
 };
 
