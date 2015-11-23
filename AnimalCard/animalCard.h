@@ -1,5 +1,3 @@
-
-
 #ifndef animalCard_hpp
 #define animalCard_hpp
 
@@ -12,7 +10,7 @@ using namespace std;
 
 enum class Orientation { UP, DOWN };
 
-enum class EvenOdd { EVEN, ODD, DEFAULT };
+enum class EvenOdd { EVEN=0, ODD=1, DEFAULT };
 
 enum class Animal { BEAR, DEER, HARE, MOOSE, WOLF };
 
@@ -29,6 +27,7 @@ public:
     virtual void setRow(EvenOdd) = 0;
     virtual EvenOdd getRow() = 0;
     virtual void printRow(EvenOdd) = 0;
+	virtual Animal getAnimal(int) = 0;
 
     inline friend std::ostream&
         operator<<(std::ostream& o, const AnimalCard& a) {

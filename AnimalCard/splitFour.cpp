@@ -50,3 +50,7 @@ void SplitFour::printRow(EvenOdd row) {
     }
     }
 }
+
+Animal SplitFour::getAnimal(int i) {
+	return animals[i / 2][i % 2];
+}

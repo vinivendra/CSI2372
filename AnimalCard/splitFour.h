@@ -21,6 +21,7 @@ public:
     virtual EvenOdd getRow();
     virtual void printRow(EvenOdd);
 
+	virtual Animal getAnimal(int);
     SplitFour(Animal[2][2]);
 };
 
