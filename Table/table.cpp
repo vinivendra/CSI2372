@@ -9,7 +9,8 @@ Table::Table() {
 //Adding a card to the table
 int Table::addAt(std::shared_ptr<SplitFour> card, int row, int col) {
 
-	if (board[row][col] != 0) return 0;
+	//Used once we will have a startCard class to start the game
+	/*if (board[row][col] != 0) return 0;
 	else {
 		int m = nbMatches(card, row, col);
 		if (m != 0) {
@@ -17,8 +18,10 @@ int Table::addAt(std::shared_ptr<SplitFour> card, int row, int col) {
 			board[row][col] = 1;
 		}
 		return m;
-	}
-
+	}*/
+	cardBoard[row][col] = card;
+	board[row][col] = 1;
+	return 0;
 }
 //returning the number of card that match the given one
 int Table::nbMatches(std::shared_ptr<SplitFour> card, int row, int col) {
@@ -58,8 +61,8 @@ void Table::print() {
 			}
 		}
 	}
-	for (int i = 102; i != 0; i--) {
-		for (int j = 102; i != 0; i--) {
+	for (int i = 102; i != -1; i--) {
+		for (int j = 102; j != -1; j--) {
 			if (board[i][j] == 1) {
 				if (maxCol < j)
 					maxCol = j;
@@ -69,28 +72,35 @@ void Table::print() {
 			}
 		}
 	}
-	
+	if (minCol != 0)
+		minCol--;
+	if (maxCol != 102)
+		maxCol++;
+	if (minRow != 0)
+		minRow--;
+	if (maxRow != 102)
+		maxRow++;
 
 	//Displaying the table
-	if (maxRow < minRow)
+	if (maxRow < minRow || maxCol < minCol)
 		std::cout << "Empty table!!" << std::endl;
 	else {
 		std::cout << "  ";
-		for (int k = minRow; k != maxRow; k++) {
-			std::cout << k + "  ";
+		for (int k = minRow; k != maxRow+1; k++) {
+			std::cout << k << "  ";
 		}
 		std::cout << std::endl;
-		for (int i = minRow; i != maxRow*3; i++) {
-			if (i % 3 == 0)
-				std::cout << i / 3 + " ";
+		for (int i = minRow; i != minRow + (maxRow - minRow+1)*3; i++) {
+			if ((i-minRow) % 3 == 0)
+				std::cout << i - 2*((i-minRow)/3) << " ";
 			else
-				std::cout << "  ";
+				std::cout << "   ";
 			for (int j = minCol; j != maxCol; j++) {
-				if (i % 3 == 2)
+				if ((i-minRow) % 3 == 2)
 					std::cout << "  ";
 				else {
-					if (board[i / 3][j] == 1)
-						cardBoard[i / 3][j]->printRow((EvenOdd)(i % 3));
+					if (board[minRow + (i - minRow) / 3][j] == 1)
+						cardBoard[minRow + (i - minRow) / 3][j]->printRow(EvenOdd((i - minRow) % 3));
 					else
 						std::cout << "  ";
 				}
