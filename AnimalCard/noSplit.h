@@ -5,7 +5,7 @@
 #include "animalCard.h"
 
 
-class NoSplit : AnimalCard {
+class NoSplit : public AnimalCard {
 	Animal animal;
 
 protected:

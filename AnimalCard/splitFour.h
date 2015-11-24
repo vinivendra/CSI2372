@@ -5,7 +5,7 @@
 #include "animalCard.h"
 
 
-class SplitFour : AnimalCard {
+class SplitFour : public AnimalCard {
     EvenOdd row;
     Orientation orientation;
     Animal animals[2][2];

@@ -5,6 +5,7 @@
 #include "AnimalCard/animalCard.h"
 #include "AnimalCard/splitFour.h"
 #include "Containers/table.h"
+#include "Containers/deck.h"
 
 
 using namespace std;
@@ -29,6 +30,18 @@ int main(int argc, const char *argv[]) {
 	testTable->addAt(cardToAdd, 52, 52);
 
 	testTable->print();
+
+
+    SplitFour *deckCard = new SplitFour(animals);
+    Deck<AnimalCard *> deck = Deck<AnimalCard *>();
+    deck.push_back(deckCard);
+    shared_ptr<AnimalCard *> resultCard = deck.draw();
+
+    AnimalCard *pointer = *resultCard;
+    pointer->printRow(EvenOdd::EVEN);
+    cout << endl;
+    pointer->printRow(EvenOdd::EVEN);
+    cout << endl;
 
 	delete testTable;
 
