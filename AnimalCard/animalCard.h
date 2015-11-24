@@ -19,6 +19,9 @@ char charForAnimal(Animal animal);
 class AnimalCard {
 
 protected:
+	EvenOdd row;
+	Orientation orientation;
+	Animal animals[2][2];
     virtual void print(ostream& o) const = 0;
 
 public:
@@ -27,6 +30,8 @@ public:
     virtual EvenOdd getRow() = 0;
     virtual void printRow(EvenOdd) = 0;
     virtual Animal getAnimal(int) = 0;
+
+	AnimalCard();
 
     inline friend std::ostream&
         operator<<(std::ostream& o, const AnimalCard& a) {

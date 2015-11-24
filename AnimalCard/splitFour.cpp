@@ -9,7 +9,7 @@ using namespace std;
 
 
 SplitFour::SplitFour(Animal animals[2][2])
-    : row(EvenOdd::EVEN), orientation(Orientation::UP) {
+    : AnimalCard() {
     for (int i = 0; i < 2; i++) {
         for (int j = 0; j < 2; j++) {
             this->animals[i][j] = animals[i][j];
@@ -51,6 +51,4 @@ void SplitFour::printRow(EvenOdd row) {
     }
 }
 
-Animal SplitFour::getAnimal(int i) {
-	return animals[i / 2][i % 2];
-}
+
