@@ -19,8 +19,13 @@ public:
     virtual EvenOdd getRow();
     virtual void printRow(EvenOdd);
 
-	Animal getAnimal(int);
+    Animal getAnimal(int);
+
+    // Virtual Constructor Idiom
     SplitFour(Animal[2][2]);
+    SplitFour (SplitFour const &);
+    SplitFour* create() const;
+    SplitFour* clone() const;
 };
 
 

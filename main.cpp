@@ -5,10 +5,25 @@
 #include "AnimalCard/animalCard.h"
 #include "AnimalCard/splitFour.h"
 #include "Containers/table.h"
-#include "Containers/deck.h"
+//#include "Containers/deck.h"
 
+#include <vector>
 
 using namespace std;
+
+
+template <class T> class Deck : public std::vector<T> {
+public:
+    std::shared_ptr<T> draw();
+};
+
+template <class T> std::shared_ptr<T> Deck<T>::draw() {
+
+    std::shared_ptr<T> result(new T(this->back()));
+    this->pop_back();
+
+    return result;
+}
 
 
 int main(int argc, const char *argv[]) {
@@ -21,29 +36,29 @@ int main(int argc, const char *argv[]) {
     cout << endl;
     card.printRow(EvenOdd::ODD);
 
-    cout << endl << "Hello, World!\n" << endl;
 
-	Table* testTable = new Table();
+    //
+    Table *testTable = new Table();
 
-	std::shared_ptr<AnimalCard> cardToAdd((AnimalCard*)new SplitFour(animals));
+    std::shared_ptr<AnimalCard> cardToAdd((AnimalCard *)new SplitFour(animals));
 
-	testTable->addAt(cardToAdd, 52, 52);
+    testTable->addAt(cardToAdd, 52, 52);
 
-	testTable->print();
+    testTable->print();
 
 
-    SplitFour *deckCard = new SplitFour(animals);
-    Deck<AnimalCard *> deck = Deck<AnimalCard *>();
+    //
+    SplitFour deckCard = SplitFour(animals);
+    Deck<AnimalCard> deck = Deck<AnimalCard>();
     deck.push_back(deckCard);
-    shared_ptr<AnimalCard *> resultCard = deck.draw();
+    shared_ptr<AnimalCard> resultCard = deck.draw();
 
-    AnimalCard *pointer = *resultCard;
-    pointer->printRow(EvenOdd::EVEN);
+    resultCard->printRow(EvenOdd::EVEN);
     cout << endl;
-    pointer->printRow(EvenOdd::EVEN);
+    resultCard->printRow(EvenOdd::EVEN);
     cout << endl;
 
-	delete testTable;
+    delete testTable;
 
     return 0;
 }

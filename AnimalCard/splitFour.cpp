@@ -8,13 +8,39 @@
 using namespace std;
 
 
-SplitFour::SplitFour(Animal animals[2][2])
-    : AnimalCard() {
+SplitFour::SplitFour(Animal animals[2][2]) : AnimalCard() {
     for (int i = 0; i < 2; i++) {
         for (int j = 0; j < 2; j++) {
             this->animals[i][j] = animals[i][j];
         }
     }
+}
+
+SplitFour::SplitFour (SplitFour const &other) {
+    this->row = other.row;
+    this->orientation = other.orientation;
+
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 2; j++) {
+            this->animals[i][j] = other.animals[i][j];
+        }
+    }
+}
+
+SplitFour* SplitFour::create() const {
+    Animal newAnimals[2][2];
+
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 2; j++) {
+            newAnimals[i][j] = this->animals[i][j];
+        }
+    }
+
+    return new SplitFour(newAnimals);
+}
+
+SplitFour* SplitFour::clone() const {
+    return new SplitFour(* this);
 }
 
 void SplitFour::print(ostream& o) const {
@@ -51,4 +77,6 @@ void SplitFour::printRow(EvenOdd row) {
     }
 }
 
-
+Animal SplitFour::getAnimal(int i) {
+    return animals[i / 2][i % 2];
+}
