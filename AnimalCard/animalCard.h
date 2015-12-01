@@ -1,5 +1,5 @@
-#ifndef animalCard_h
-#define animalCard_h
+#ifndef animalCard_hpp
+#define animalCard_hpp
 
 
 #include <iostream>
@@ -10,9 +10,11 @@ using namespace std;
 
 enum class Orientation { UP, DOWN };
 
-enum class EvenOdd { EVEN = 0, ODD = 1, DEFAULT };
+enum class EvenOdd { EVEN=0, ODD=1, DEFAULT };
 
-enum class Animal { BEAR, DEER, HARE, MOOSE, WOLF, ALL };
+//Added all to take into account the start card
+enum class Animal { BEAR=1, DEER=2, HARE=3, MOOSE=4, WOLF=5, ALL=6 };
+
 char charForAnimal(Animal animal);
 
 
@@ -26,19 +28,13 @@ public:
     virtual void setRow(EvenOdd) = 0;
     virtual EvenOdd getRow() = 0;
     virtual void printRow(EvenOdd) = 0;
-    virtual Animal getAnimal(int) = 0;
+	virtual Animal getAnimal(int) = 0;
 
     inline friend std::ostream&
-    operator<<(std::ostream& o, const AnimalCard& a) {
+        operator<<(std::ostream& o, const AnimalCard& a) {
         a.print(o);
         return o;
     }
-
-    // Virtual Constructor Idiom
-    AnimalCard();
-    AnimalCard (AnimalCard const &);
-    virtual AnimalCard* create() const = 0;
-    virtual AnimalCard* clone() const = 0;
 };
 
 

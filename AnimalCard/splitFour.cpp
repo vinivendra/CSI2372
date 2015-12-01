@@ -8,46 +8,32 @@
 using namespace std;
 
 
-SplitFour::SplitFour(Animal animals[2][2]) : AnimalCard() {
+SplitFour::SplitFour(Animal _animals[2][2])
+    : row(EvenOdd::EVEN), orientation(Orientation::UP) {
     for (int i = 0; i < 2; i++) {
         for (int j = 0; j < 2; j++) {
-            this->animals[i][j] = animals[i][j];
+            this->animals[i][j] = _animals[i][j];
         }
     }
-}
-
-SplitFour::SplitFour (SplitFour const &other) {
-    this->row = other.row;
-    this->orientation = other.orientation;
-
-    for (int i = 0; i < 2; i++) {
-        for (int j = 0; j < 2; j++) {
-            this->animals[i][j] = other.animals[i][j];
-        }
-    }
-}
-
-SplitFour* SplitFour::create() const {
-    Animal newAnimals[2][2];
-
-    for (int i = 0; i < 2; i++) {
-        for (int j = 0; j < 2; j++) {
-            newAnimals[i][j] = this->animals[i][j];
-        }
-    }
-
-    return new SplitFour(newAnimals);
-}
-
-SplitFour* SplitFour::clone() const {
-    return new SplitFour(* this);
 }
 
 void SplitFour::print(ostream& o) const {
 }
 
 void SplitFour::setOrientation(Orientation newValue) {
-    orientation = orientation;
+	if (newValue != orientation) {
+		orientation = newValue;
+		Animal newAnimals[2][2];
+		newAnimals[0][0] = animals[1][1];
+		newAnimals[0][1] = animals[1][0];
+		newAnimals[1][0] = animals[0][1];
+		newAnimals[1][1] = animals[0][0];
+		for (int i = 0; i != 2; i++) {
+			for (int j = 0; j != 2; j++) {
+				animals[i][j] = newAnimals[i][j];
+			}
+		}
+	}
 }
 
 void SplitFour::setRow(EvenOdd newValue) {
@@ -78,5 +64,5 @@ void SplitFour::printRow(EvenOdd row) {
 }
 
 Animal SplitFour::getAnimal(int i) {
-    return animals[i / 2][i % 2];
+	return animals[i / 2][i % 2];
 }

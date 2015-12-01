@@ -1,19 +1,15 @@
-#ifndef noSplit_h
-#define noSplit_h
-
+#ifndef splitTwo_hpp
+#define splitTwo_hpp
 
 #include "animalCard.h"
 
-
-class NoSplit : public AnimalCard {
-	
-protected:
-	Animal animal;
+class SplitTwo :AnimalCard {
 	EvenOdd row;
 	Orientation orientation;
-protected:
+	Animal animals[2];
 
-virtual void print(ostream& o) const;
+protected:
+	virtual void print(ostream& o) const;
 
 public:
 	virtual void setOrientation(Orientation);
@@ -21,10 +17,9 @@ public:
 	virtual EvenOdd getRow();
 	virtual void printRow(EvenOdd);
 
-	Animal getAnimal(int);
-	NoSplit(Animal);
+	virtual Animal getAnimal(int);
+	SplitTwo(Animal[2]);
 };
-
 
 #endif
 

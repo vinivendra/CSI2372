@@ -3,62 +3,67 @@
 #include <iostream>
 
 #include "AnimalCard/animalCard.h"
-#include "AnimalCard/splitFour.h"
-#include "Containers/table.h"
-//#include "Containers/deck.h"
+#include "Container/Table/table.h"
+#include "Container/AnimalCardFactory/AnimalCardFactory.h"
+#include "Container/Player/player.h"
+#include "Container/Deck/deck.h"
 
 #include <vector>
 
 using namespace std;
 
 
-template <class T> class Deck : public std::vector<T> {
-public:
-    std::shared_ptr<T> draw();
-};
-
-template <class T> std::shared_ptr<T> Deck<T>::draw() {
-
-    std::shared_ptr<T> result(new T(this->back()));
-    this->pop_back();
-
-    return result;
-}
-
-
 int main(int argc, const char *argv[]) {
 
-    Animal animals[2][2]
-        = {{Animal::BEAR, Animal::DEER}, {Animal::WOLF, Animal::HARE}};
-    SplitFour card = SplitFour(animals);
+	//Game loop
 
-    card.printRow(EvenOdd::EVEN);
-    cout << endl;
-    card.printRow(EvenOdd::ODD);
+	cout << "How many players are playing? (2-5 players) ";
+	int i = 0;
+	while(i == 0)
+		cin >> i;
+	cout << endl;
+	AnimalCardFactory::getFactory();
+	Player* playerList = new Player[i];
+	string name;
+	for (int j = 0; j != i; j++) {
+		cout << "Name of player " << j + 1 << ": ";
+		cin >> name;
+		playerList[j].setName(name);
+		cout << endl;
+	}
+	//Or load from file
 
+	bool playerHasWon = false;
+	Table gameBoard;
+	int nbdraws[5]{ 0,0,0,0,0 };
 
-    //
-    Table *testTable = new Table();
-
-    std::shared_ptr<AnimalCard> cardToAdd((AnimalCard *)new SplitFour(animals));
-
-    testTable->addAt(cardToAdd, 52, 52);
-
-    testTable->print();
-
-
-    //
-    SplitFour deckCard = SplitFour(animals);
-    Deck<AnimalCard> deck = Deck<AnimalCard>();
-    deck.push_back(deckCard);
-    shared_ptr<AnimalCard> resultCard = deck.draw();
-
-    resultCard->printRow(EvenOdd::EVEN);
-    cout << endl;
-    resultCard->printRow(EvenOdd::EVEN);
-    cout << endl;
-
-    delete testTable;
-
+	while (!playerHasWon) {
+		//If pause save game to file and exit
+		for (int k = 0; k != i; k++) {
+			cout << "Table: " << endl;
+			gameBoard.print();
+			for (int n = 0; n != nbdraws[k];n++)
+				playerList[k].yourHand += AnimalCardFactory::getFactory()->getDeck().draw();
+			cout << "Player: "<< playerList[k].getName() << endl;
+			cout << playerList[k] << endl;
+			int c = -1,x,y;
+			do {
+				cout << "Which card do you want to play? ";
+				while(c<0 || c>playerList[k].yourHand.noCards()-1)
+					cin >> c;
+				cout << endl;
+				cout << "Where do you want to play it? \nX coordonnate & Enter & Y coordonnate & Enter!";
+				cin >> x >> y;
+				cout << endl;
+				nbdraws[k] = gameBoard.addAt(playerList[k].yourHand[c], y, x);
+			} while ( nbdraws[k] == 0);
+			playerList[k].yourHand -= playerList[k].yourHand[c];
+			//If action card do the necessary!
+			for (int m = 0; m != i; m++) {
+				if (gameBoard.win(playerList[m].getName()))
+					playerHasWon = true;
+			}
+		}
+	}
     return 0;
 }

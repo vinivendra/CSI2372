@@ -20,14 +20,11 @@ char charForAnimal(Animal animal) {
     case Animal::WOLF:
         return 'w';
         break;
+	case Animal::ALL:
+		return '*';
+		break;
     default:
         return 'x';
         break;
     }
-}
-
-AnimalCard::AnimalCard() :row(EvenOdd::EVEN), orientation(Orientation::UP) {};
-
-Animal AnimalCard::getAnimal(int i) {
-	return animals[i / 2][i % 2];
 }

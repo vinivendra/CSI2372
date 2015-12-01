@@ -1,13 +1,15 @@
-#ifndef splitFour_h
-#define splitFour_h
+
+
+#ifndef SplitFour_hpp
+#define SplitFour_hpp
 
 
 #include "animalCard.h"
 
 
-class SplitFour : public AnimalCard {
+class SplitFour : AnimalCard {
     EvenOdd row;
-    Orientation orientation;
+	Orientation orientation;
     Animal animals[2][2];
 
 protected:
@@ -18,14 +20,8 @@ public:
     virtual void setRow(EvenOdd);
     virtual EvenOdd getRow();
     virtual void printRow(EvenOdd);
-
-    Animal getAnimal(int);
-
-    // Virtual Constructor Idiom
+	virtual Animal getAnimal(int);
     SplitFour(Animal[2][2]);
-    SplitFour (SplitFour const &);
-    SplitFour* create() const;
-    SplitFour* clone() const;
 };
 
 
