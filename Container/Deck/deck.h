@@ -12,7 +12,6 @@ public:
 	std::shared_ptr<T> draw() {
 		std::shared_ptr<T> result = this->back();
 		this->pop_back();
-		std::cout << this->size() << std::endl;
 		return result;
 	};
 };
