@@ -11,7 +11,7 @@
 
 #include "AnimalCard/animalCard.h"
 #include "AnimalCard/ActionCard/actionCard.h"
-#include "AnimalCard/ActionCard/mooseAction.h"
+#include "AnimalCard/ActionCard/hareAction.h"
 #include "Container/Table/table.h"
 #include "Container/AnimalCardFactory/AnimalCardFactory.h"
 #include "Container/Player/player.h"
@@ -57,8 +57,8 @@ int main(int argc, const char *argv[]) {
                 playerList[k].yourHand
                     += AnimalCardFactory::getFactory()->getDeck().draw();
 
-            shared_ptr<AnimalCard> wolfAction
-                = (std::shared_ptr<AnimalCard>)((AnimalCard *)new MooseAction());
+            shared_ptr<AnimalCard> wolfAction = (std::shared_ptr<AnimalCard>)((
+                AnimalCard *)new HareAction());
             playerList[0].yourHand += wolfAction;
 
             cout << "Player: " << playerList[k].getName() << endl;
@@ -68,24 +68,29 @@ int main(int argc, const char *argv[]) {
 
             shared_ptr<AnimalCard> chosenCard = nullptr;
 
-            do {
-                cout << "Which card do you want to play? ";
+            while (true) {
+                try {
+                    cout << "Which card do you want to play? ";
 
-                while (c < 0 || c > playerList[k].yourHand.noCards() - 1)
-                    cin >> c;
+                    while (c < 0 || c > playerList[k].yourHand.noCards() - 1)
+                        cin >> c;
 
-                cout << endl;
-                cout << "Where do you want to play it? \nX coordonnate & Enter "
-                        "& Y coordonnate & Enter!";
+                    cout << endl;
+                    cout << "Where do you want to play it? \nX coordinate & "
+                            "Enter & Y coordinate & Enter!" << endl;
 
-                cin >> x >> y;
+                    cin >> x >> y;
 
-                cout << endl;
+                    cout << endl;
 
-                chosenCard = playerList[k].yourHand[c];
+                    chosenCard = playerList[k].yourHand[c];
 
-                nbdraws[k] = gameBoard.addAt(chosenCard, y, x);
-            } while (nbdraws[k] == 0);
+                    nbdraws[k] = gameBoard.addAt(chosenCard, y, x);
+                } catch (...) {
+                    continue;
+                }
+                break;
+            }
 
             playerList[k].yourHand -= chosenCard;
 

@@ -5,6 +5,20 @@
 
 
 ////////////////////////////////////////////////////////////////////////////////
+// IllegalPick class
+
+IllegalPick::IllegalPick(int x, int y)
+    : runtime_error("division by zero"), x(x), y(y) {
+}
+
+const char* IllegalPick::what() const throw() {
+    ostringstream stream = ostringstream("");
+    stream << runtime_error::what() << "Position " << x << ", " << y
+           << "is invalid." << endl;
+    return stream.str().c_str();
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // IllegalPlacement class
 
 IllegalPlacement::IllegalPlacement(int x, int y)
@@ -17,6 +31,7 @@ const char* IllegalPlacement::what() const throw() {
            << "is invalid." << endl;
     return stream.str().c_str();
 }
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Table class
@@ -32,19 +47,19 @@ Table::Table() : minRow(102), minCol(102), maxRow(0), maxCol(0) {
 // Adding a card to the table
 int Table::addAt(std::shared_ptr<AnimalCard> card, int row, int col) {
 
-    // Used once we will have a startCard class to start the game
-    if (board[row][col] != 0)
-        return 0;
-    else {
+    if (board[row][col] == 0) {
         int m = nbMatches(card, row, col);
         if (m != 0) {
             cardBoard[row][col] = card;
             board[row][col] = 1;
+            return m;
         }
-        return m;
     }
+
+    throw IllegalPlacement(row, col);
     return 0;
 }
+
 // returning the number of card that match the given one
 int Table::nbMatches(std::shared_ptr<AnimalCard> card, int row, int col) {
     int m = 0;
@@ -147,7 +162,7 @@ void Table::print() {
 
 shared_ptr<AnimalCard> Table::pickAt(int row, int col) {
     if (board[row][col] != 1 || (row == 52 && col == 52)) {
-        throw IllegalPlacement(row, col);
+        throw IllegalPick(row, col);
     }
 
     shared_ptr<AnimalCard> pickedCard = cardBoard[row][col];

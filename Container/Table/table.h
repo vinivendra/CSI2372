@@ -6,6 +6,13 @@
 #include <memory>
 
 
+class IllegalPick : runtime_error {
+    int x, y;
+public:
+    IllegalPick(int, int);
+    virtual const char* what() const throw();
+};
+
 class IllegalPlacement : runtime_error {
     int x, y;
 public:

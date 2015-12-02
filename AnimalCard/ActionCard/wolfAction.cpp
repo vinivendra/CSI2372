@@ -36,6 +36,7 @@ void WolfAction::perform(Table &table,
         } catch (...) {
             cout << "Invalid location, try again." << endl;
             queryResult = query();
+            queryResult.getCoordinates(x, y);
             continue;
         }
         break;
