@@ -4,8 +4,7 @@
 // TODO: Make sure there are no useless re-declarations and re-implementations
 // TODO: Allow player to reverse card orientation
 // TODO: Implement Table operators
-// TODO: Throw exceptions
-// TODO: Add action cards to the animal factory
+// TODO: Add action cards, no splits, etc. to the animal factory
 
 #include <iostream>
 
@@ -57,8 +56,8 @@ int main(int argc, const char *argv[]) {
                 playerList[k].yourHand
                     += AnimalCardFactory::getFactory()->getDeck().draw();
 
-            shared_ptr<AnimalCard> wolfAction = (std::shared_ptr<AnimalCard>)((
-                AnimalCard *)new HareAction());
+            shared_ptr<AnimalCard> wolfAction
+                = (std::shared_ptr<AnimalCard>)((AnimalCard *)new HareAction());
             playerList[0].yourHand += wolfAction;
 
             cout << "Player: " << playerList[k].getName() << endl;
