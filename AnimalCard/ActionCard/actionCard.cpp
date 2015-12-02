@@ -17,6 +17,6 @@ void ActionCard::printRow(EvenOdd row) {
     std::cout << uppercaseCharForAnimal(animal);
 }
 
-void ActionCard::setCurrentPlayer(int newValue) {
-    currentPlayer = newValue;
+void ActionCard::setGameInfo(GameInfo gameInfo) {
+    this->gameInfo = gameInfo;
 }

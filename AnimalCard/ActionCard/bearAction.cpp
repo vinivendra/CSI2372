@@ -25,6 +25,8 @@ void BearAction::perform(Table &table,
     queryResult.getPlayer(x);
     x--;    // Correct the index
 
+    int currentPlayer = gameInfo.currentPlayer;
+
     Hand firstHand = playerList[currentPlayer].yourHand;
     playerList[currentPlayer].yourHand = playerList[x].yourHand;
     playerList[x].yourHand = firstHand;

@@ -21,6 +21,9 @@ QueryResult WolfAction::query() {
 void WolfAction::perform(Table &table,
                          Player *playerList,
                          QueryResult queryResult) {
+
+    int currentPlayer = gameInfo.currentPlayer;
+
     int x, y;
     queryResult.getCoordinates(x, y);
 

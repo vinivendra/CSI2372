@@ -11,7 +11,7 @@
 
 #include "AnimalCard/animalCard.h"
 #include "AnimalCard/ActionCard/actionCard.h"
-#include "AnimalCard/ActionCard/bearAction.h"
+#include "AnimalCard/ActionCard/mooseAction.h"
 #include "Container/Table/table.h"
 #include "Container/AnimalCardFactory/AnimalCardFactory.h"
 #include "Container/Player/player.h"
@@ -58,7 +58,7 @@ int main(int argc, const char *argv[]) {
                     += AnimalCardFactory::getFactory()->getDeck().draw();
 
             shared_ptr<AnimalCard> wolfAction
-                = (std::shared_ptr<AnimalCard>)((AnimalCard *)new BearAction());
+                = (std::shared_ptr<AnimalCard>)((AnimalCard *)new MooseAction());
             playerList[0].yourHand += wolfAction;
 
             cout << "Player: " << playerList[k].getName() << endl;
@@ -93,7 +93,7 @@ int main(int argc, const char *argv[]) {
             if (shared_ptr<ActionCard> actionCard
                 = dynamic_pointer_cast<ActionCard>(chosenCard)) {
 
-                actionCard->setCurrentPlayer(k);
+                actionCard->setGameInfo({k, i});
                 QueryResult queryResult = actionCard->query();
                 actionCard->perform(gameBoard, playerList, queryResult);
             }

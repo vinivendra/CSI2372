@@ -8,15 +8,21 @@
 #include "queryResult.h"
 
 
+struct GameInfo {
+    int currentPlayer;
+    int numberOfPlayers;
+};
+
+
 class ActionCard : public StartCard {
 protected:
-    int currentPlayer;
+    GameInfo gameInfo;
 public:
     ActionCard(Animal);
 
     void printRow(EvenOdd);
 
-    void setCurrentPlayer(int);
+    void setGameInfo(GameInfo);
 
     virtual QueryResult query() = 0;
     virtual void perform(Table &, Player *, QueryResult) = 0;
