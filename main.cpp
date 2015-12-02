@@ -1,9 +1,6 @@
-// TODO: Implement AnimalCard's print functions (and subclasses too)
 // TODO: Make sure everything that can be const is const
 // TODO: Make sure everything that can be private or protected is too
-// TODO: Make sure there are no useless re-declarations and re-implementations
 // TODO: Implement Table operators
-// TODO: Add action cards, no splits, etc. to the animal factory
 
 #include <iostream>
 
