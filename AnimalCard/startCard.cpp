@@ -1,5 +1,4 @@
 #include "startCard.h"
 
-StartCard::StartCard():NoSplit(Animal::ALL){
-
+StartCard::StartCard(Animal animal) : NoSplit(animal) {
 }

@@ -3,10 +3,10 @@
 
 #include "noSplit.h"
 
-class StartCard : NoSplit {
+class StartCard : public NoSplit {
 
 public:
-	StartCard();
+    StartCard(Animal = Animal::ALL);
 };
 
 #endif

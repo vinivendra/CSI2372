@@ -21,19 +21,19 @@ void SplitFour::print(ostream& o) const {
 }
 
 void SplitFour::setOrientation(Orientation newValue) {
-	if (newValue != orientation) {
-		orientation = newValue;
-		Animal newAnimals[2][2];
-		newAnimals[0][0] = animals[1][1];
-		newAnimals[0][1] = animals[1][0];
-		newAnimals[1][0] = animals[0][1];
-		newAnimals[1][1] = animals[0][0];
-		for (int i = 0; i != 2; i++) {
-			for (int j = 0; j != 2; j++) {
-				animals[i][j] = newAnimals[i][j];
-			}
-		}
-	}
+    if (newValue != orientation) {
+        orientation = newValue;
+        Animal newAnimals[2][2];
+        newAnimals[0][0] = animals[1][1];
+        newAnimals[0][1] = animals[1][0];
+        newAnimals[1][0] = animals[0][1];
+        newAnimals[1][1] = animals[0][0];
+        for (int i = 0; i != 2; i++) {
+            for (int j = 0; j != 2; j++) {
+                animals[i][j] = newAnimals[i][j];
+            }
+        }
+    }
 }
 
 void SplitFour::setRow(EvenOdd newValue) {
@@ -64,5 +64,5 @@ void SplitFour::printRow(EvenOdd row) {
 }
 
 Animal SplitFour::getAnimal(int i) {
-	return animals[i / 2][i % 2];
+    return animals[i / 2][i % 2];
 }

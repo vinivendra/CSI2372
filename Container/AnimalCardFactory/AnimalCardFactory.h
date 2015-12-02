@@ -5,12 +5,12 @@
 #include "../../AnimalCard/animalCard.h"
 
 class AnimalCardFactory {
-	Deck<AnimalCard> deck;
-	//static AnimalCardFactory* deckFactory;
+    Deck<AnimalCard> deck;
+    // static AnimalCardFactory* deckFactory;
 public:
-	AnimalCardFactory();
-	static AnimalCardFactory* getFactory();
-	Deck<AnimalCard>& getDeck();
+    AnimalCardFactory();
+    static AnimalCardFactory* getFactory();
+    Deck<AnimalCard>& getDeck();
 };
 
 #endif

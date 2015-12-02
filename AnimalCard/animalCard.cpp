@@ -20,9 +20,9 @@ char charForAnimal(Animal animal) {
     case Animal::WOLF:
         return 'w';
         break;
-	case Animal::ALL:
-		return '*';
-		break;
+    case Animal::ALL:
+        return '*';
+        break;
     default:
         return 'x';
         break;

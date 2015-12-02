@@ -9,7 +9,7 @@
 
 class SplitFour : AnimalCard {
     EvenOdd row;
-	Orientation orientation;
+    Orientation orientation;
     Animal animals[2][2];
 
 protected:
@@ -20,7 +20,7 @@ public:
     virtual void setRow(EvenOdd);
     virtual EvenOdd getRow();
     virtual void printRow(EvenOdd);
-	virtual Animal getAnimal(int);
+    virtual Animal getAnimal(int);
     SplitFour(Animal[2][2]);
 };
 
