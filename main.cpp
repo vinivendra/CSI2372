@@ -10,7 +10,7 @@
 
 #include "AnimalCard/animalCard.h"
 #include "AnimalCard/ActionCard/actionCard.h"
-#include "AnimalCard/ActionCard/hareAction.h"
+#include "AnimalCard/ActionCard/deerAction.h"
 #include "Container/Table/table.h"
 #include "Container/AnimalCardFactory/AnimalCardFactory.h"
 #include "Container/Player/player.h"
@@ -57,7 +57,7 @@ int main(int argc, const char *argv[]) {
                     += AnimalCardFactory::getFactory()->getDeck().draw();
 
             shared_ptr<AnimalCard> wolfAction
-                = (std::shared_ptr<AnimalCard>)((AnimalCard *)new HareAction());
+                = (std::shared_ptr<AnimalCard>)((AnimalCard *)new DeerAction());
             playerList[0].yourHand += wolfAction;
 
             cout << "Player: " << playerList[k].getName() << endl;

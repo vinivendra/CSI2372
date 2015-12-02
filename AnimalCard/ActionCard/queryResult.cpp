@@ -18,7 +18,3 @@ void QueryResult::getSecondCoordinates(int &x, int &y) const {
 void QueryResult::getPlayer(int &p) const {
     p = a;
 }
-
-void QueryResult::getSecondPlayer(int &p) const {
-    p = b;
-}

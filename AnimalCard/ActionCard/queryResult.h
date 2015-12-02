@@ -15,7 +15,6 @@ public:
     void getCoordinates(int&, int&) const;
     void getSecondCoordinates(int&, int&) const;
     void getPlayer(int&) const;
-    void getSecondPlayer(int&) const;
 };
 
 
