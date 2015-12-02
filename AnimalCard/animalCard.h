@@ -1,5 +1,6 @@
-#ifndef animalCard_hpp
-#define animalCard_hpp
+
+#ifndef animalCard_h
+#define animalCard_h
 
 
 #include <iostream>
@@ -8,7 +9,7 @@
 using namespace std;
 
 
-enum class Orientation { UP, DOWN };
+enum class Orientation { UP = 0, DOWN = 1 };
 
 enum class EvenOdd { EVEN = 0, ODD = 1, DEFAULT };
 

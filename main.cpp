@@ -2,7 +2,6 @@
 // TODO: Make sure everything that can be const is const
 // TODO: Make sure everything that can be private or protected is too
 // TODO: Make sure there are no useless re-declarations and re-implementations
-// TODO: Allow player to reverse card orientation
 // TODO: Implement Table operators
 // TODO: Add action cards, no splits, etc. to the animal factory
 
@@ -62,16 +61,23 @@ int main(int argc, const char *argv[]) {
             cout << "Player: " << playerList[k].getName() << endl;
             cout << playerList[k] << endl;
 
-            int c = -1, x, y;
+            int c, x, y;
 
             shared_ptr<AnimalCard> chosenCard = nullptr;
 
             while (true) {
                 try {
+                    c = -1;
+
                     cout << "Which card do you want to play? ";
 
                     while (c < 0 || c > playerList[k].yourHand.noCards() - 1)
                         cin >> c;
+
+                    int orientation = -1;
+                    cout << "Should the card's orientation be reversed? [0/1] ";
+                    while (orientation != 0 && orientation != 1)
+                        cin >> orientation;
 
                     cout << endl;
                     cout << "Where do you want to play it? \nX coordinate & "
@@ -83,8 +89,11 @@ int main(int argc, const char *argv[]) {
 
                     chosenCard = playerList[k].yourHand[c];
 
+                    chosenCard->setOrientation((Orientation)orientation);
+
                     nbdraws[k] = gameBoard.addAt(chosenCard, y, x);
                 } catch (...) {
+                    cout << "Uh oh, invalid play. Try again." << endl;
                     continue;
                 }
                 break;
