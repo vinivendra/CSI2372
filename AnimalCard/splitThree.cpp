@@ -1,4 +1,6 @@
+
 #include <iostream>
+
 #include "splitThree.h"
 
 
@@ -12,6 +14,19 @@ SplitThree::SplitThree(Animal _animals[2][2])
 }
 
 void SplitThree::print(ostream& o) const {
+    switch (row) {
+        case EvenOdd::EVEN: {
+            o << charForAnimal(this->animals[0][0]);
+            o << charForAnimal(this->animals[0][1]);
+            break;
+        }
+        case EvenOdd::ODD: {
+            o << charForAnimal(this->animals[1][0]);
+            o << charForAnimal(this->animals[1][1]);
+            break;
+        }
+        default: { break; }
+    }
 }
 
 void SplitThree::setOrientation(Orientation newValue) {
@@ -31,7 +46,9 @@ void SplitThree::setOrientation(Orientation newValue) {
 }
 
 void SplitThree::setRow(EvenOdd newValue) {
-    row = newValue;
+    if (row != EvenOdd::DEFAULT) {
+        row = newValue;
+    }
 }
 
 EvenOdd SplitThree::getRow() {

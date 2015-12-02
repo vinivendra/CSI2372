@@ -1,6 +1,7 @@
 
 #include "queryResult.h"
 
+
 QueryResult::QueryResult(int a, int b, int c, int d) : a(a), b(b), c(c), d(d) {
 }
 

@@ -1,7 +1,6 @@
 
 #include "hareAction.h"
 
-
 #include <iostream>
 
 

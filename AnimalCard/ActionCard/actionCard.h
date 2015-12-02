@@ -17,6 +17,7 @@ struct GameInfo {
 class ActionCard : public StartCard {
 protected:
     GameInfo gameInfo;
+
 public:
     ActionCard(Animal);
 

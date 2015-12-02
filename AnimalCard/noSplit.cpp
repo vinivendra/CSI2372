@@ -1,22 +1,25 @@
+
 #include <iostream>
 
 #include "noSplit.h"
 
+
 NoSplit::NoSplit(Animal _animal)
-    : row(EvenOdd::EVEN), orientation(Orientation::UP) {
+    : row(EvenOdd::EVEN) {
     animal = _animal;
 }
 
 void NoSplit::print(ostream& o) const {
+    o << charForAnimal(animal) << charForAnimal(animal);
 }
 
 void NoSplit::setOrientation(Orientation _orientation) {
-    orientation = _orientation;
-    // Do nothing
 }
 
-void NoSplit::setRow(EvenOdd newRow) {
-    row = newRow;
+void NoSplit::setRow(EvenOdd newValue) {
+    if (row != EvenOdd::DEFAULT) {
+        row = newValue;
+    }
 }
 
 EvenOdd NoSplit::getRow() {
@@ -24,8 +27,7 @@ EvenOdd NoSplit::getRow() {
 }
 
 void NoSplit::printRow(EvenOdd row) {
-    std::cout << charForAnimal(animal);
-    std::cout << charForAnimal(animal);
+    std::cout << charForAnimal(animal) << charForAnimal(animal);
 }
 
 Animal NoSplit::getAnimal(int) {

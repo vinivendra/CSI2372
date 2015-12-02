@@ -10,7 +10,6 @@
 
 #include "AnimalCard/animalCard.h"
 #include "AnimalCard/ActionCard/actionCard.h"
-#include "AnimalCard/ActionCard/deerAction.h"
 #include "Container/Table/table.h"
 #include "Container/AnimalCardFactory/AnimalCardFactory.h"
 #include "Container/Player/player.h"
@@ -27,12 +26,17 @@ int main(int argc, const char *argv[]) {
 
     cout << "How many players are playing? (2-5 players) ";
     int i = 0;
-    while (i == 0)
+    while (i == 0) {
         cin >> i;
+    }
     cout << endl;
-    AnimalCardFactory::getFactory();
+
+    AnimalCardFactory *factory = AnimalCardFactory::getFactory();
+
     Player *playerList = new Player[i];
+
     string name;
+
     for (int j = 0; j != i; j++) {
         cout << "Name of player " << j + 1 << ": ";
         cin >> name;
@@ -53,12 +57,7 @@ int main(int argc, const char *argv[]) {
             gameBoard.print();
 
             for (int n = 0; n != nbdraws[k]; n++)
-                playerList[k].yourHand
-                    += AnimalCardFactory::getFactory()->getDeck().draw();
-
-            shared_ptr<AnimalCard> wolfAction
-                = (std::shared_ptr<AnimalCard>)((AnimalCard *)new DeerAction());
-            playerList[0].yourHand += wolfAction;
+                playerList[k].yourHand += factory->getDeck().draw();
 
             cout << "Player: " << playerList[k].getName() << endl;
             cout << playerList[k] << endl;

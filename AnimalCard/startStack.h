@@ -12,7 +12,7 @@
 using namespace std;
 
 
-class StartStack : AnimalCard {
+class StartStack : public AnimalCard {
     deque<shared_ptr<ActionCard>> stack;
     EvenOdd row;
     Orientation orientation;

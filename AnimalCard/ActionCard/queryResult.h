@@ -2,11 +2,6 @@
 #ifndef queryResult_h
 #define queryResult_h
 
-#include <string>
-
-
-using namespace std;
-
 
 class QueryResult {
     int a, b, c, d;
@@ -16,6 +11,5 @@ public:
     void getSecondCoordinates(int&, int&) const;
     void getPlayer(int&) const;
 };
-
 
 #endif

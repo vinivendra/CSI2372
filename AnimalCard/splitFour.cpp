@@ -1,23 +1,32 @@
 
-
 #include <iostream>
 
 #include "splitFour.h"
 
 
-using namespace std;
-
-
-SplitFour::SplitFour(Animal _animals[2][2])
+SplitFour::SplitFour(Animal animals[2][2])
     : row(EvenOdd::EVEN), orientation(Orientation::UP) {
     for (int i = 0; i < 2; i++) {
         for (int j = 0; j < 2; j++) {
-            this->animals[i][j] = _animals[i][j];
+            this->animals[i][j] = animals[i][j];
         }
     }
 }
 
 void SplitFour::print(ostream& o) const {
+    switch (row) {
+    case EvenOdd::EVEN: {
+        o << charForAnimal(this->animals[0][0]);
+        o << charForAnimal(this->animals[0][1]);
+        break;
+    }
+    case EvenOdd::ODD: {
+        o << charForAnimal(this->animals[1][0]);
+        o << charForAnimal(this->animals[1][1]);
+        break;
+    }
+    default: { break; }
+    }
 }
 
 void SplitFour::setOrientation(Orientation newValue) {
@@ -37,7 +46,9 @@ void SplitFour::setOrientation(Orientation newValue) {
 }
 
 void SplitFour::setRow(EvenOdd newValue) {
-    row = newValue;
+    if (row != EvenOdd::DEFAULT) {
+        row = newValue;
+    }
 }
 
 EvenOdd SplitFour::getRow() {

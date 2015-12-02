@@ -6,9 +6,11 @@
 
 class AnimalCardFactory {
     Deck<AnimalCard> deck;
-    // static AnimalCardFactory* deckFactory;
-public:
+    static AnimalCardFactory* deckFactory;
+
     AnimalCardFactory();
+    
+public:
     static AnimalCardFactory* getFactory();
     Deck<AnimalCard>& getDeck();
 };

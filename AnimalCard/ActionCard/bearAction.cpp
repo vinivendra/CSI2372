@@ -21,11 +21,12 @@ QueryResult BearAction::query() {
 void BearAction::perform(Table &table,
                          Player *playerList,
                          QueryResult queryResult) {
+    
+    int currentPlayer = gameInfo.currentPlayer;
+
     int x;
     queryResult.getPlayer(x);
     x--;    // Correct the index
-
-    int currentPlayer = gameInfo.currentPlayer;
 
     Hand firstHand = playerList[currentPlayer].yourHand;
     playerList[currentPlayer].yourHand = playerList[x].yourHand;

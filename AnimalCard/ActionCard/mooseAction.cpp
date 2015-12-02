@@ -17,6 +17,7 @@ QueryResult MooseAction::query() {
 void MooseAction::perform(Table &table,
                          Player *playerList,
                          QueryResult queryResult) {
+    
     int numberOfPlayers = gameInfo.numberOfPlayers;
 
     Hand lastHand = playerList[numberOfPlayers - 1].yourHand;

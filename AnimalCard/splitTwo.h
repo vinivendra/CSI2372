@@ -1,24 +1,27 @@
-#ifndef splitTwo_hpp
-#define splitTwo_hpp
+
+#ifndef splitTwo_h
+#define splitTwo_h
+
 
 #include "animalCard.h"
 
-class SplitTwo : AnimalCard {
+
+class SplitTwo : public AnimalCard {
     EvenOdd row;
     Orientation orientation;
-    Animal animals[2];
+    Animal animals[2][2];
 
 protected:
     virtual void print(ostream& o) const;
 
 public:
+    SplitTwo(Animal[2][2]);
+
     virtual void setOrientation(Orientation);
     virtual void setRow(EvenOdd);
     virtual EvenOdd getRow();
     virtual void printRow(EvenOdd);
-
     virtual Animal getAnimal(int);
-    SplitTwo(Animal[2]);
 };
 
 #endif
