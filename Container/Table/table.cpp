@@ -203,7 +203,7 @@ bool Table::win(std::string& animal) {
     int nbSecretAnimalCard = 0;
     for (int i = minRow; i != maxRow; i++) {
         for (int j = minCol; j != maxCol; j++) {
-            if (board[i][j] != 0) {
+            if (board[i][j]) {
                 for (int k = 0; k != 4; k++) {
                     if (std::string(1,
                                     charForAnimal(cardBoard[i][j]->getAnimal(
@@ -230,4 +230,20 @@ Table& Table::operator-=(std::shared_ptr<NoSplit> card) {
     = dynamic_pointer_cast<StartStack>(cardBoard[52][52]);
     *startStack -= card;
     return *this;
+}
+
+void Table::writeToFile(ostream& o) const {
+    cardBoard[52][52]->writeToFile(o);
+
+    for (int i = minRow; i <= maxRow; i++) {
+        for (int j = minCol; j <= maxCol; j++) {
+            if (i != 52 || j != 52) {   // Skip the start stack
+                if (board[i][j]) {
+                    o << i << " " << j << endl;
+                    cardBoard[i][j]->writeToFile(o);
+                    o << endl;
+                }
+            }
+        }
+    }
 }

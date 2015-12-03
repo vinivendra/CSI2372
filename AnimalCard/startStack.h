@@ -27,6 +27,8 @@ public:
     virtual void printRow(EvenOdd) const;
     virtual Animal getAnimal(int) const;
 
+    virtual void writeToFile(ostream& o) const;
+
     StartStack& operator+=(std::shared_ptr<NoSplit>);
     StartStack& operator-=(shared_ptr<NoSplit>);
     shared_ptr<StartCard> getStartCard();

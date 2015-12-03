@@ -16,13 +16,12 @@ void writeToFile(string filename,
     ostream *o = &cout;
 
     writePlayersToFile(*o, playerList, numberOfPlayers);
-    writeTableToFile(*o, table);
     writeDeckToFile(*o, deck);
+    writeTableToFile(*o, table);
 }
 
 void writeTableToFile(ostream& o, Table *table) {
-    // Write the Start Stack's contents
-    // Write the cards at the table and their positions
+    table->writeToFile(o);
 }
 
 void writePlayersToFile(ostream& o, Player *playerList, int numberOfPlayers) {

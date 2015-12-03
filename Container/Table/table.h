@@ -41,6 +41,8 @@ public:
     std::shared_ptr<AnimalCard> pickAt(int row, int col);
     bool win(string& animal);
     void print();
+
+    void writeToFile(ostream& o) const;
 };
 
 #endif

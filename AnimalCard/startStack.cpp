@@ -48,3 +48,11 @@ StartStack& StartStack::operator-=(shared_ptr<NoSplit> newValue) {
 shared_ptr<StartCard> StartStack::getStartCard() {
     return shared_ptr<StartCard>();
 }
+
+void StartStack::writeToFile(ostream& o) const {
+    o << stack.size() << endl;
+    for (int i = 0; i < stack.size(); i++) {
+        stack.at(i)->writeToFile(o);
+        o << endl;
+    }
+}
