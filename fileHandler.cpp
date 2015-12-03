@@ -25,14 +25,19 @@ void writeTableToFile(ostream& o, Table *table) {
 }
 
 void writePlayersToFile(ostream& o, Player *playerList, int numberOfPlayers) {
-    cout << numberOfPlayers << endl;
+    o << numberOfPlayers << endl;
     for (int i = 0; i < numberOfPlayers; i++) {
         playerList[i].writeToFile(o);
     }
 }
 
 void writeDeckToFile(ostream& o, Deck<AnimalCard> *deck) {
-    // Write the Deck's contents
+    o << deck->size() << endl;
+
+    for (int i = 0; i < deck->size(); i++) {
+        deck->at(i)->writeToFile(o);
+        o << endl;
+    }
 }
 
 
