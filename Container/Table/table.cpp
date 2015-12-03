@@ -42,7 +42,7 @@ bool animalsAreEqual(Animal a, Animal b) {
 
 // Creating a table to place the cards with a start card in the middle
 Table::Table() : minRow(102), minCol(102), maxRow(0), maxCol(0) {
-    std::fill(board[0] + 0, board[102] + 102, 0);
+    fill(board[0] + 0, board[102] + 102, 0);
 
     shared_ptr<AnimalCard> startStack
         = shared_ptr<AnimalCard>(new StartStack());
@@ -51,7 +51,7 @@ Table::Table() : minRow(102), minCol(102), maxRow(0), maxCol(0) {
 }
 
 // Adding a card to the table
-int Table::addAt(std::shared_ptr<AnimalCard> card, int row, int col) {
+int Table::addAt(shared_ptr<AnimalCard> card, int row, int col) {
 
     if (board[row][col] == 0) {
         int m = nbMatches(card, row, col);
@@ -67,7 +67,7 @@ int Table::addAt(std::shared_ptr<AnimalCard> card, int row, int col) {
 }
 
 // returning the number of card that match the given one
-int Table::nbMatches(std::shared_ptr<AnimalCard> card, int row, int col) {
+int Table::nbMatches(shared_ptr<AnimalCard> card, int row, int col) {
     int m = 0;
     if (row - 1 >= 0 && board[row - 1][col] == 1) {
         shared_ptr<AnimalCard> otherCard = cardBoard[row - 1][col];
@@ -157,31 +157,31 @@ void Table::print() {
 
     // Displaying the table
     if (maxRow < minRow || maxCol < minCol)
-        std::cout << "Empty table!!" << std::endl;
+        cout << "Empty table!!" << endl;
     else {
-        std::cout << "   ";
+        cout << "   ";
         for (int k = minCol; k != maxCol + 1; k++) {
-            std::cout << k << "  ";
+            cout << k << "  ";
         }
-        std::cout << std::endl;
+        cout << endl;
         for (int i = minRow; i != minRow + (maxRow - minRow + 1) * 3; i++) {
             if ((i - minRow) % 3 == 0)
-                std::cout << i - 2 * ((i - minRow) / 3) << " ";
+                cout << i - 2 * ((i - minRow) / 3) << " ";
             else
-                std::cout << "   ";
+                cout << "   ";
             for (int j = minCol; j != maxCol; j++) {
                 if ((i - minRow) % 3 == 2)
-                    std::cout << "  ";
+                    cout << "  ";
                 else {
                     if (board[minRow + (i - minRow) / 3][j] == 1)
                         cardBoard[minRow + (i - minRow) / 3][j]->printRow(
                             EvenOdd((i - minRow) % 3));
                     else
-                        std::cout << "  ";
+                        cout << "  ";
                 }
-                std::cout << "  ";
+                cout << "  ";
             }
-            std::cout << std::endl;
+            cout << endl;
         }
     }
 }
@@ -199,15 +199,14 @@ shared_ptr<AnimalCard> Table::pickAt(int row, int col) {
     return pickedCard;
 }
 
-bool Table::win(std::string& animal) {
+bool Table::win(string& animal) {
     int nbSecretAnimalCard = 0;
     for (int i = minRow; i != maxRow; i++) {
         for (int j = minCol; j != maxCol; j++) {
             if (board[i][j]) {
                 for (int k = 0; k != 4; k++) {
-                    if (std::string(1,
-                                    charForAnimal(cardBoard[i][j]->getAnimal(
-                                        k))) == animal) {
+                    if (string(1, charForAnimal(cardBoard[i][j]->getAnimal(k)))
+                        == animal) {
                         nbSecretAnimalCard++;
                         break;
                     }
@@ -218,26 +217,28 @@ bool Table::win(std::string& animal) {
     return nbSecretAnimalCard > 11;
 };
 
-Table& Table::operator+=(std::shared_ptr<NoSplit> card) {
+Table& Table::operator+=(shared_ptr<NoSplit> card) {
     shared_ptr<StartStack> startStack
         = dynamic_pointer_cast<StartStack>(cardBoard[52][52]);
     *startStack += card;
     return *this;
 }
 
-Table& Table::operator-=(std::shared_ptr<NoSplit> card) {
+Table& Table::operator-=(shared_ptr<NoSplit> card) {
     shared_ptr<StartStack> startStack
-    = dynamic_pointer_cast<StartStack>(cardBoard[52][52]);
+        = dynamic_pointer_cast<StartStack>(cardBoard[52][52]);
     *startStack -= card;
     return *this;
 }
 
 void Table::writeToFile(ostream& o) const {
-    cardBoard[52][52]->writeToFile(o);
+    shared_ptr<StartStack> startStack
+        = dynamic_pointer_cast<StartStack>(cardBoard[52][52]);
+    startStack->writeToFile(o);
 
     for (int i = minRow; i <= maxRow; i++) {
         for (int j = minCol; j <= maxCol; j++) {
-            if (i != 52 || j != 52) {   // Skip the start stack
+            if (i != 52 || j != 52) { // Skip the start stack
                 if (board[i][j]) {
                     o << i << " " << j << endl;
                     cardBoard[i][j]->writeToFile(o);

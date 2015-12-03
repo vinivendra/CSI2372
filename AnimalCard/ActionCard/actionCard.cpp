@@ -13,8 +13,8 @@ char uppercaseCharForAnimal(Animal animal) {
 }
 
 void ActionCard::printRow(EvenOdd row) {
-    std::cout << uppercaseCharForAnimal(animal);
-    std::cout << uppercaseCharForAnimal(animal);
+    cout << uppercaseCharForAnimal(animal);
+    cout << uppercaseCharForAnimal(animal);
 }
 
 void ActionCard::setGameInfo(GameInfo gameInfo) {

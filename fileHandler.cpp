@@ -1,5 +1,8 @@
 
+
 #include "fileHandler.h"
+#include <fstream>
+
 
 void writeTableToFile(ostream& o, Table *table);
 void writePlayersToFile(ostream& o, Player *playerList, int numberOfPlayers);
@@ -13,11 +16,14 @@ void writeToFile(string filename,
                  int numberOfPlayers) {
     // Write basic info: whose turn is it, player names, etc.
 
-    ostream *o = &cout;
+    ofstream file;
+    file.open(filename);
 
-    writePlayersToFile(*o, playerList, numberOfPlayers);
-    writeDeckToFile(*o, deck);
-    writeTableToFile(*o, table);
+    writePlayersToFile(file, playerList, numberOfPlayers);
+    writeDeckToFile(file, deck);
+    writeTableToFile(file, table);
+
+    file.close();
 }
 
 void writeTableToFile(ostream& o, Table *table) {

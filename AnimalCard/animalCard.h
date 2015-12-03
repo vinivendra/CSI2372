@@ -38,13 +38,14 @@ public:
     virtual void printRow(EvenOdd) const = 0;
     virtual Animal getAnimal(int) const = 0;
 
-    virtual void writeToFile(ostream& o) const {
-        printRow(EvenOdd::EVEN);
-        printRow(EvenOdd::ODD);
+    virtual void writeToFile(ostream& o) {
+        print(o);
+        setRow((EvenOdd)(!(bool)getRow()));
+        print(o);
     }
 
-    inline friend std::ostream&
-        operator<<(std::ostream& o, const AnimalCard& a) {
+    inline friend ostream&
+        operator<<(ostream& o, const AnimalCard& a) {
         a.print(o);
         return o;
     }

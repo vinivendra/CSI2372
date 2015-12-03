@@ -50,7 +50,7 @@ int main(int argc, const char *argv[]) {
     while (!playerHasWon) {
         // If pause save game to file and exit
         cout << "==== Writing to file =========" << endl;
-        writeToFile("foo", &gameBoard, &factory->getDeck(), playerList, i);
+        writeToFile("gameSave.txt", &gameBoard, &factory->getDeck(), playerList, i);
         cout << "==============================" << endl;
 
         for (int k = 0; k != i; k++) {

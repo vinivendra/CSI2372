@@ -6,10 +6,13 @@
 #include <iostream>
 
 
-template <class T> class Deck : public std::vector<std::shared_ptr<T>> {
+using namespace std;
+
+
+template <class T> class Deck : public vector<shared_ptr<T>> {
 public:
-    std::shared_ptr<T> draw() {
-        std::shared_ptr<T> result = this->back();
+    shared_ptr<T> draw() {
+        shared_ptr<T> result = this->back();
         this->pop_back();
         return result;
     };

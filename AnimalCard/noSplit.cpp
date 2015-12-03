@@ -27,7 +27,7 @@ EvenOdd NoSplit::getRow() const {
 }
 
 void NoSplit::printRow(EvenOdd row) const {
-    std::cout << charForAnimal(animal) << charForAnimal(animal);
+    cout << charForAnimal(animal) << charForAnimal(animal);
 }
 
 Animal NoSplit::getAnimal(int) const {

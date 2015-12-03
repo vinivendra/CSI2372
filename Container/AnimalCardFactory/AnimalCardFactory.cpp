@@ -14,7 +14,7 @@
 #include <random>
 
 void addCard(Deck<AnimalCard> &deck, AnimalCard *newCard) {
-    deck.push_back((std::shared_ptr<AnimalCard>)((AnimalCard *)newCard));
+    deck.push_back((shared_ptr<AnimalCard>)((AnimalCard *)newCard));
 }
 
 AnimalCardFactory::AnimalCardFactory() {
@@ -73,8 +73,8 @@ AnimalCardFactory::AnimalCardFactory() {
     }
 
     // Shuffling the set of cards
-    auto engine = std::default_random_engine{};
-    std::shuffle(std::begin(deck), std::end(deck), engine);
+    auto engine = default_random_engine{};
+    shuffle(begin(deck), end(deck), engine);
     // deckFactory = this;
 }
 
