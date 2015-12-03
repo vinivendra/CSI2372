@@ -22,15 +22,15 @@ void StartStack::setRow(EvenOdd row) {
     stack.front()->setRow(row);
 }
 
-EvenOdd StartStack::getRow() {
+EvenOdd StartStack::getRow() const {
     return stack.front()->getRow();
 }
 
-void StartStack::printRow(EvenOdd row) {
+void StartStack::printRow(EvenOdd row) const {
     stack.front()->printRow(row);
 }
 
-Animal StartStack::getAnimal(int index) {
+Animal StartStack::getAnimal(int index) const {
     Animal animal = stack.front()->getAnimal(index);
     return animal;
 }

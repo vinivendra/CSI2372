@@ -34,9 +34,14 @@ protected:
 public:
     virtual void setOrientation(Orientation) = 0;
     virtual void setRow(EvenOdd) = 0;
-    virtual EvenOdd getRow() = 0;
-    virtual void printRow(EvenOdd) = 0;
-    virtual Animal getAnimal(int) = 0;
+    virtual EvenOdd getRow() const = 0;
+    virtual void printRow(EvenOdd) const = 0;
+    virtual Animal getAnimal(int) const = 0;
+
+    virtual void writeToFile(ostream& o) const {
+        printRow(EvenOdd::EVEN);
+        printRow(EvenOdd::ODD);
+    }
 
     inline friend std::ostream&
         operator<<(std::ostream& o, const AnimalCard& a) {

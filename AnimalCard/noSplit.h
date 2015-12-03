@@ -19,9 +19,9 @@ public:
 
     virtual void setOrientation(Orientation);
     virtual void setRow(EvenOdd);
-    virtual EvenOdd getRow();
-    virtual void printRow(EvenOdd);
-    virtual Animal getAnimal(int);
+    virtual EvenOdd getRow() const;
+    virtual void printRow(EvenOdd) const;
+    virtual Animal getAnimal(int) const;
 };
 
 #endif

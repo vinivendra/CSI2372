@@ -1,5 +1,10 @@
+
 #include "player.h"
 #include "../AnimalCardFactory/AnimalCardFactory.h"
+
+
+using namespace std;
+
 
 int Player::nextAnimal = 0;
 
@@ -28,7 +33,13 @@ std::string Player::getSecretAnimal() {
     return this->secretAnimal;
 }
 
-void Player::print(std::ostream& o) const {
-    o << "Secret animal: " << secretAnimal << std::endl;
-    o << yourHand;
+void Player::writeToFile(ostream& o) {
+    o << playerName << endl;
+    o << secretAnimal << endl;
+    yourHand.writeToFile(o);
+}
+
+void Player::print(ostream& o) const {
+    cout << "Secret animal: " << secretAnimal << endl;
+    cout << yourHand;
 }

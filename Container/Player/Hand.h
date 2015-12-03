@@ -5,19 +5,25 @@
 #include <memory>
 #include <vector>
 
+
+using namespace std;
+
+
 class Hand {
-	std::vector<std::shared_ptr<AnimalCard>> hand;
+	vector<shared_ptr<AnimalCard>> hand;
 protected:
-	virtual void print(std::ostream& o) const;
+	virtual void print(ostream& o) const;
 
 public:
-	Hand& operator+=(std::shared_ptr<AnimalCard>);
-	Hand& operator-=(std::shared_ptr<AnimalCard>);
-	std::shared_ptr<AnimalCard> operator[](int);
+	Hand& operator+=(shared_ptr<AnimalCard>);
+	Hand& operator-=(shared_ptr<AnimalCard>);
+	shared_ptr<AnimalCard> operator[](int);
 	int noCards();
 
-	inline friend std::ostream&
-		operator<<(std::ostream& o, const Hand& hand) {
+    void writeToFile(ostream& o) const;
+
+	inline friend ostream&
+		operator<<(ostream& o, const Hand& hand) {
 		hand.print(o);
 		return o;
 	}

@@ -51,11 +51,11 @@ void SplitThree::setRow(EvenOdd newValue) {
     }
 }
 
-EvenOdd SplitThree::getRow() {
+EvenOdd SplitThree::getRow() const {
     return row;
 }
 
-void SplitThree::printRow(EvenOdd row) {
+void SplitThree::printRow(EvenOdd row) const {
     switch (row) {
     case EvenOdd::EVEN: {
         cout << charForAnimal(this->animals[0][0]);
@@ -74,6 +74,6 @@ void SplitThree::printRow(EvenOdd row) {
     }
 }
 
-Animal SplitThree::getAnimal(int i) {
+Animal SplitThree::getAnimal(int i) const {
     return animals[i / 2][i % 2];
 }

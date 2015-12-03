@@ -17,15 +17,15 @@ class StartStack : public AnimalCard {
     Orientation orientation;
 
 public:
+    StartStack();
+
     void print(ostream& o) const;
 
     virtual void setOrientation(Orientation);
     virtual void setRow(EvenOdd);
-    virtual EvenOdd getRow();
-    virtual void printRow(EvenOdd);
-    virtual Animal getAnimal(int);
-
-    StartStack();
+    virtual EvenOdd getRow() const;
+    virtual void printRow(EvenOdd) const;
+    virtual Animal getAnimal(int) const;
 
     StartStack& operator+=(std::shared_ptr<NoSplit>);
     StartStack& operator-=(shared_ptr<NoSplit>);

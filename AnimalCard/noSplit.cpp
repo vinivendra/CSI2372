@@ -22,14 +22,14 @@ void NoSplit::setRow(EvenOdd newValue) {
     }
 }
 
-EvenOdd NoSplit::getRow() {
+EvenOdd NoSplit::getRow() const {
     return row;
 }
 
-void NoSplit::printRow(EvenOdd row) {
+void NoSplit::printRow(EvenOdd row) const {
     std::cout << charForAnimal(animal) << charForAnimal(animal);
 }
 
-Animal NoSplit::getAnimal(int) {
+Animal NoSplit::getAnimal(int) const {
     return animal;
 }
