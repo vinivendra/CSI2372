@@ -49,9 +49,16 @@ int main(int argc, const char *argv[]) {
 
     while (!playerHasWon) {
         // If pause save game to file and exit
-        cout << "==== Writing to file =========" << endl;
-        writeToFile("gameSave.txt", &gameBoard, &factory->getDeck(), playerList, i);
-        cout << "==============================" << endl;
+        bool shouldPause = false;
+        cout << "Would you like to pause, save and exit? [0/1] " << endl;
+        cin >> shouldPause;
+
+        if (shouldPause) {
+            cout << "Saving information to gameSave.txt..." << endl;
+            writeToFile("gameSave.txt", &gameBoard, &factory->getDeck(), playerList, i);
+            cout << "Game saved sucessfully. Goodbye!" << endl;
+            return 0;
+        }
 
         for (int k = 0; k != i; k++) {
 

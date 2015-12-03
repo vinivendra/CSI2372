@@ -14,8 +14,6 @@ void writeToFile(string filename,
                  Deck<AnimalCard> *deck,
                  Player *playerList,
                  int numberOfPlayers) {
-    // Write basic info: whose turn is it, player names, etc.
-
     ofstream file;
     file.open(filename);
 
