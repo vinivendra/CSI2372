@@ -6,6 +6,9 @@
 #include <memory>
 
 
+using namespace std;
+
+
 class IllegalPick : runtime_error {
     int x, y;
 public:
@@ -28,13 +31,15 @@ class Table {
     int maxRow, maxCol, minRow, minCol;
 
 public:
-    Table();
-    int nbMatches(std::shared_ptr<AnimalCard>, int, int);
-    int addAt(std::shared_ptr<AnimalCard>, int row, int col);
+    Table(shared_ptr<AnimalCard> startStack);
+
+    shared_ptr<AnimalCard> getStartStack();
+    int nbMatches(shared_ptr<AnimalCard>, int, int);
+    int addAt(shared_ptr<AnimalCard>, int row, int col);
     // Table& operator+=(std::shared_ptr<ActionCard>);
     // Table& operator-=(std::shared_ptr<ActionCard>);
     std::shared_ptr<AnimalCard> pickAt(int row, int col);
-    bool win(std::string& animal);
+    bool win(string& animal);
     void print();
 };
 

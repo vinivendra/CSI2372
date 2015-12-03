@@ -36,11 +36,19 @@ const char* IllegalPlacement::what() const throw() {
 ////////////////////////////////////////////////////////////////////////////////
 // Table class
 
+bool animalsAreEqual(Animal a, Animal b) {
+    return (a == b) || a == Animal::ALL || b == Animal::ALL;
+}
+
+shared_ptr<AnimalCard> Table::getStartStack() {
+    return cardBoard[52][52];
+}
+
 // Creating a table to place the cards with a start card in the middle
-Table::Table() : minRow(102), minCol(102), maxRow(0), maxCol(0) {
+Table::Table(shared_ptr<AnimalCard> startStack)
+    : minRow(102), minCol(102), maxRow(0), maxCol(0) {
     std::fill(board[0] + 0, board[102] + 102, 0);
-    cardBoard[52][52]
-        = (std::shared_ptr<AnimalCard>)(AnimalCard*)new StartCard();
+    cardBoard[52][52] = startStack;
     board[52][52] = 1;
 }
 
@@ -64,27 +72,47 @@ int Table::addAt(std::shared_ptr<AnimalCard> card, int row, int col) {
 int Table::nbMatches(std::shared_ptr<AnimalCard> card, int row, int col) {
     int m = 0;
     if (row - 1 >= 0 && board[row - 1][col] == 1) {
-        if ((row - 1 == 52 && col == 52)
-            || cardBoard[row - 1][col]->getAnimal(2) == card->getAnimal(0)
-            || cardBoard[row - 1][col]->getAnimal(3) == card->getAnimal(1))
+        shared_ptr<AnimalCard> otherCard = cardBoard[row - 1][col];
+
+        Animal a1 = otherCard->getAnimal(2);
+        Animal a2 = otherCard->getAnimal(3);
+        Animal b1 = card->getAnimal(0);
+        Animal b2 = card->getAnimal(1);
+
+        if (animalsAreEqual(a1, b1) || animalsAreEqual(a2, b2))
             m++;
     }
     if (col - 1 >= 0 && board[row][col - 1] == 1) {
-        if ((row == 52 && col - 1 == 52)
-            || cardBoard[row][col - 1]->getAnimal(1) == card->getAnimal(0)
-            || cardBoard[row][col - 1]->getAnimal(3) == card->getAnimal(2))
+        shared_ptr<AnimalCard> otherCard = cardBoard[row][col - 1];
+
+        Animal a1 = otherCard->getAnimal(1);
+        Animal a2 = otherCard->getAnimal(3);
+        Animal b1 = card->getAnimal(0);
+        Animal b2 = card->getAnimal(2);
+
+        if (animalsAreEqual(a1, b1) || animalsAreEqual(a2, b2))
             m++;
     }
     if (col + 1 < 103 && board[row][col + 1] == 1) {
-        if ((row == 52 && col + 1 == 52)
-            || cardBoard[row][col + 1]->getAnimal(0) == card->getAnimal(1)
-            || cardBoard[row][col + 1]->getAnimal(2) == card->getAnimal(3))
+        shared_ptr<AnimalCard> otherCard = cardBoard[row][col + 1];
+
+        Animal a1 = otherCard->getAnimal(0);
+        Animal a2 = otherCard->getAnimal(2);
+        Animal b1 = card->getAnimal(1);
+        Animal b2 = card->getAnimal(3);
+
+        if (animalsAreEqual(a1, b1) || animalsAreEqual(a2, b2))
             m++;
     }
     if (row + 1 < 103 && board[row + 1][col] == 1) {
-        if ((row + 1 == 52 && col == 52)
-            || cardBoard[row + 1][col]->getAnimal(0) == card->getAnimal(2)
-            || cardBoard[row + 1][col]->getAnimal(1) == card->getAnimal(3))
+        shared_ptr<AnimalCard> otherCard = cardBoard[row + 1][col];
+
+        Animal a1 = otherCard->getAnimal(0);
+        Animal a2 = otherCard->getAnimal(1);
+        Animal b1 = card->getAnimal(2);
+        Animal b2 = card->getAnimal(3);
+
+        if (animalsAreEqual(a1, b1) || animalsAreEqual(a2, b2))
             m++;
     }
     return m;

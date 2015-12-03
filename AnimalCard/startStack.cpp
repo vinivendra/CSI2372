@@ -5,13 +5,16 @@
 
 using namespace std;
 
+StartStack::StartStack() {
+    stack.push_back(shared_ptr<NoSplit>(new StartCard()));
+}
 
 void StartStack::print(ostream& o) const {
     
 }
 
 void StartStack::setOrientation(Orientation orientation) {
-    shared_ptr<ActionCard>card = stack.front();
+    shared_ptr<NoSplit>card = stack.front();
     stack.front()->setOrientation(orientation);
 }
 
@@ -28,7 +31,8 @@ void StartStack::printRow(EvenOdd row) {
 }
 
 Animal StartStack::getAnimal(int index) {
-    return stack.front()->getAnimal(index);
+    Animal animal = stack.front()->getAnimal(index);
+    return animal;
 }
 
 StartStack& StartStack::operator+=(shared_ptr<ActionCard> newValue) {

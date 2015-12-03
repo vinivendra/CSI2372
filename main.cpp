@@ -1,11 +1,13 @@
 // TODO: Make sure everything that can be const is const
 // TODO: Make sure everything that can be private or protected is too
 // TODO: Implement Table operators
+// TODO: Write to file and read from file
 
 #include <iostream>
 
 #include "AnimalCard/animalCard.h"
 #include "AnimalCard/ActionCard/actionCard.h"
+#include "AnimalCard/startStack.h"
 #include "Container/Table/table.h"
 #include "Container/AnimalCardFactory/AnimalCardFactory.h"
 #include "Container/Player/player.h"
@@ -41,8 +43,11 @@ int main(int argc, const char *argv[]) {
     }
     // Or load from file
 
+    shared_ptr<StartStack> startStack
+        = shared_ptr<StartStack>(new StartStack());
+
     bool playerHasWon = false;
-    Table gameBoard;
+    Table gameBoard = Table(startStack);
     int nbdraws[5]{0, 0, 0, 0, 0};
 
     while (!playerHasWon) {
@@ -86,9 +91,40 @@ int main(int argc, const char *argv[]) {
 
                     chosenCard = playerList[k].yourHand[c];
 
-                    chosenCard->setOrientation((Orientation)orientation);
+                    // If we're setting a card on the startStack
+                    if (x == 52 && y == 52) {
+                        if (shared_ptr<ActionCard> actionCard
+                            = dynamic_pointer_cast<ActionCard>(chosenCard)) {
 
-                    nbdraws[k] = gameBoard.addAt(chosenCard, y, x);
+                            cout << "Would you like to place the card at the "
+                                    "top of the stack or at the bottom? [1/0] ";
+
+                            bool choiceIsTop;
+                            cin >> choiceIsTop;
+
+                            if (choiceIsTop) {
+                                *startStack += actionCard;
+                            } else {
+                                *startStack -= actionCard;
+
+                                actionCard->setGameInfo({k, i});
+                                QueryResult queryResult = actionCard->query();
+                                actionCard->perform(gameBoard,
+                                                    playerList,
+                                                    queryResult);
+                            }
+
+
+                        } else {
+                            cout << "Only action cards may be placed on the "
+                                    "stack." << endl;
+                            throw IllegalPlacement(x, y);
+                        }
+                    } else {
+                        chosenCard->setOrientation((Orientation)orientation);
+
+                        nbdraws[k] = gameBoard.addAt(chosenCard, y, x);
+                    }
                 } catch (...) {
                     cout << "Uh oh, invalid play. Try again." << endl;
                     continue;
@@ -97,15 +133,6 @@ int main(int argc, const char *argv[]) {
             }
 
             playerList[k].yourHand -= chosenCard;
-
-            // If it's an action card:
-            if (shared_ptr<ActionCard> actionCard
-                = dynamic_pointer_cast<ActionCard>(chosenCard)) {
-
-                actionCard->setGameInfo({k, i});
-                QueryResult queryResult = actionCard->query();
-                actionCard->perform(gameBoard, playerList, queryResult);
-            }
 
             for (int m = 0; m != i; m++) {
 

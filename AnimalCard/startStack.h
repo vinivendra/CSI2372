@@ -3,7 +3,7 @@
 #define startStack_h
 
 #include "animalCard.h"
-#include "actionCard.h"
+#include "ActionCard/actionCard.h"
 #include "startCard.h"
 
 #include <deque>
@@ -13,22 +13,24 @@ using namespace std;
 
 
 class StartStack : public AnimalCard {
-    deque<shared_ptr<ActionCard>> stack;
+    deque<shared_ptr<NoSplit>> stack;
     EvenOdd row;
     Orientation orientation;
 
 public:
     void print(ostream& o) const;
 
-    void setOrientation(Orientation);
-    void setRow(EvenOdd);
-    EvenOdd getRow();
-    void printRow(EvenOdd);
-    Animal getAnimal(int);
+    virtual void setOrientation(Orientation);
+    virtual void setRow(EvenOdd);
+    virtual EvenOdd getRow();
+    virtual void printRow(EvenOdd);
+    virtual Animal getAnimal(int);
+
+    StartStack();
 
     StartStack& operator+=(std::shared_ptr<ActionCard>);
-    StartStack& operator-=(std::shared_ptr<ActionCard>);
-    std::shared_ptr<StartCard> getStartCard();
+    StartStack& operator-=(shared_ptr<ActionCard>);
+    shared_ptr<StartCard> getStartCard();
 };
 
 #endif
