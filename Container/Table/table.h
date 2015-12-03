@@ -3,6 +3,7 @@
 
 
 #include "../../AnimalCard/animalCard.h"
+#include "../../AnimalCard/startStack.h"
 #include <memory>
 
 
@@ -31,13 +32,12 @@ class Table {
     int maxRow, maxCol, minRow, minCol;
 
 public:
-    Table(shared_ptr<AnimalCard> startStack);
+    Table();
 
-    shared_ptr<AnimalCard> getStartStack();
     int nbMatches(shared_ptr<AnimalCard>, int, int);
     int addAt(shared_ptr<AnimalCard>, int row, int col);
-    // Table& operator+=(std::shared_ptr<ActionCard>);
-    // Table& operator-=(std::shared_ptr<ActionCard>);
+    Table& operator+=(std::shared_ptr<NoSplit>);
+    Table& operator-=(std::shared_ptr<NoSplit>);
     std::shared_ptr<AnimalCard> pickAt(int row, int col);
     bool win(string& animal);
     void print();

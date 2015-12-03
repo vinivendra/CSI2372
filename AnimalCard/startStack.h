@@ -3,7 +3,6 @@
 #define startStack_h
 
 #include "animalCard.h"
-#include "ActionCard/actionCard.h"
 #include "startCard.h"
 
 #include <deque>
@@ -28,8 +27,8 @@ public:
 
     StartStack();
 
-    StartStack& operator+=(std::shared_ptr<ActionCard>);
-    StartStack& operator-=(shared_ptr<ActionCard>);
+    StartStack& operator+=(std::shared_ptr<NoSplit>);
+    StartStack& operator-=(shared_ptr<NoSplit>);
     shared_ptr<StartCard> getStartCard();
 };
 

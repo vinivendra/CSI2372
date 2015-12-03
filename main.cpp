@@ -1,6 +1,5 @@
 // TODO: Make sure everything that can be const is const
 // TODO: Make sure everything that can be private or protected is too
-// TODO: Implement Table operators
 // TODO: Write to file and read from file
 
 #include <iostream>
@@ -43,11 +42,8 @@ int main(int argc, const char *argv[]) {
     }
     // Or load from file
 
-    shared_ptr<StartStack> startStack
-        = shared_ptr<StartStack>(new StartStack());
-
     bool playerHasWon = false;
-    Table gameBoard = Table(startStack);
+    Table gameBoard = Table();
     int nbdraws[5]{0, 0, 0, 0, 0};
 
     while (!playerHasWon) {
@@ -103,9 +99,9 @@ int main(int argc, const char *argv[]) {
                             cin >> choiceIsTop;
 
                             if (choiceIsTop) {
-                                *startStack += actionCard;
+                                gameBoard += actionCard;
                             } else {
-                                *startStack -= actionCard;
+                                gameBoard -= actionCard;
 
                                 actionCard->setGameInfo({k, i});
                                 QueryResult queryResult = actionCard->query();

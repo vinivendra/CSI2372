@@ -40,14 +40,12 @@ bool animalsAreEqual(Animal a, Animal b) {
     return (a == b) || a == Animal::ALL || b == Animal::ALL;
 }
 
-shared_ptr<AnimalCard> Table::getStartStack() {
-    return cardBoard[52][52];
-}
-
 // Creating a table to place the cards with a start card in the middle
-Table::Table(shared_ptr<AnimalCard> startStack)
-    : minRow(102), minCol(102), maxRow(0), maxCol(0) {
+Table::Table() : minRow(102), minCol(102), maxRow(0), maxCol(0) {
     std::fill(board[0] + 0, board[102] + 102, 0);
+
+    shared_ptr<AnimalCard> startStack
+        = shared_ptr<AnimalCard>(new StartStack());
     cardBoard[52][52] = startStack;
     board[52][52] = 1;
 }
@@ -219,3 +217,17 @@ bool Table::win(std::string& animal) {
     }
     return nbSecretAnimalCard > 11;
 };
+
+Table& Table::operator+=(std::shared_ptr<NoSplit> card) {
+    shared_ptr<StartStack> startStack
+        = dynamic_pointer_cast<StartStack>(cardBoard[52][52]);
+    *startStack += card;
+    return *this;
+}
+
+Table& Table::operator-=(std::shared_ptr<NoSplit> card) {
+    shared_ptr<StartStack> startStack
+    = dynamic_pointer_cast<StartStack>(cardBoard[52][52]);
+    *startStack -= card;
+    return *this;
+}

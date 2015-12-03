@@ -35,12 +35,12 @@ Animal StartStack::getAnimal(int index) {
     return animal;
 }
 
-StartStack& StartStack::operator+=(shared_ptr<ActionCard> newValue) {
+StartStack& StartStack::operator+=(shared_ptr<NoSplit> newValue) {
     stack.push_front(newValue);
     return *this;
 }
 
-StartStack& StartStack::operator-=(shared_ptr<ActionCard> newValue) {
+StartStack& StartStack::operator-=(shared_ptr<NoSplit> newValue) {
     stack.push_back(newValue);
     return *this;
 }
