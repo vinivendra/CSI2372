@@ -2,6 +2,7 @@
 #define player_hpp
 
 #include "Hand.h"
+#include "../AnimalCardFactory/AnimalCardFactory.h"
 #include <string>
 
 
@@ -28,8 +29,33 @@ public:
 
     void writeToFile(ostream& o);
 
-    inline friend ostream&
-        operator<<(ostream& o, const Player& player) {
+    inline friend istream& operator>>(istream& file, Player& player) {
+        string name;
+        string secretAnimal;
+        int numberOfCards;
+
+        getline(file, name);
+        getline(file, name);
+        file >> secretAnimal;
+        file >> numberOfCards;
+
+        player.playerName = name;
+        player.secretAnimal = secretAnimal;
+
+        for (int j = 0; j < numberOfCards; j++) {
+            string cardString;
+            file >> cardString;
+
+            shared_ptr<AnimalCard> card =
+                AnimalCardFactory::createCard(cardString);
+            
+            player.yourHand += card;
+        }
+        
+        return file;
+    }
+
+    inline friend ostream& operator<<(ostream& o, const Player& player) {
         player.print(o);
         return o;
     }

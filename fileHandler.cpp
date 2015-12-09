@@ -60,27 +60,7 @@ void readToFile(Table *table,
     *playerList = players;
 
     for (int i = 0; i < numberOfPlayers; i++) {
-        string name;
-        string secretAnimal;
-        int numberOfCards;
-
-        getline(file, name);
-        getline(file, name);
-        file >> secretAnimal;
-        file >> numberOfCards;
-
-        players[i].setName(name);
-        players[i].swapSecretAnimal(secretAnimal);
-
-        for (int j = 0; j < numberOfCards; j++) {
-            string cardString;
-            file >> cardString;
-
-            shared_ptr<AnimalCard> card =
-                AnimalCardFactory::createCard(cardString);
-
-            players[i].yourHand += card;
-        }
+        file >> players[i];
     }
 
     int numberOfDeckCards;
@@ -93,38 +73,7 @@ void readToFile(Table *table,
         AnimalCardFactory::getFactory()->addCardToDeck(cardString);
     }
 
-    int numberOfStackCards;
-    file >> numberOfStackCards;
-
-    for (int i = 0; i < numberOfStackCards; i++) {
-        string cardString;
-        file >> cardString;
-
-        shared_ptr<AnimalCard> card =
-            AnimalCardFactory::createCard(cardString);
-
-        if (shared_ptr<NoSplit> noSplit =
-                dynamic_pointer_cast<NoSplit>(card)) {
-            *table += noSplit;
-        }
-    }
-
-    while (true) {
-        int x, y;
-        file >> x;
-        file >> y;
-
-        if (file.eof())
-            break;
-
-        string cardString;
-        file >> cardString;
-
-        shared_ptr<AnimalCard> card =
-            AnimalCardFactory::createCard(cardString);
-
-        table->insert(card, x, y);
-    }
+    file >> *table;
 
     file.close();
 }
