@@ -20,6 +20,7 @@ protected:
 public:
     Hand yourHand;
     Player();
+    void setupAndDrawCards();
     string swapSecretAnimal(string&);
     string getSecretAnimal();
     void setName(string);

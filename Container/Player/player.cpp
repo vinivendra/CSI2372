@@ -17,6 +17,10 @@ string Player::getName() {
 }
 
 Player::Player() {
+
+}
+
+void Player::setupAndDrawCards() {
     nextAnimal++;
     secretAnimal = charForAnimal((Animal)nextAnimal);
     for (int i = 0; i != 3; i++)

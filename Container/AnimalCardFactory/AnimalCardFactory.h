@@ -12,7 +12,14 @@ class AnimalCardFactory {
     
 public:
     static AnimalCardFactory* getFactory();
+    static AnimalCardFactory* readFromFile(istream &i);
+
+    void randomizeDeck();
+
     Deck<AnimalCard>& getDeck();
+
+    static shared_ptr<AnimalCard> createCard(string animals);
+    void addCardToDeck(string animals);
 };
 
 #endif

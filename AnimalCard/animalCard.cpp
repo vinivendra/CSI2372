@@ -28,3 +28,27 @@ char charForAnimal(Animal animal) {
         break;
     }
 }
+
+
+Animal animalForChar(char animal) {
+    switch (animal) {
+        case 'b':
+            return Animal::BEAR;
+            break;
+        case 'd':
+            return Animal::DEER;
+            break;
+        case 'h':
+            return Animal::HARE;
+            break;
+        case 'm':
+            return Animal::MOOSE;
+            break;
+        case 'w':
+            return Animal::WOLF;
+            break;
+        default:
+            return Animal::ALL;
+            break;
+    }
+}

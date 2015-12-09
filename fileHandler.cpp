@@ -4,13 +4,15 @@
 #include <fstream>
 
 
+static string filename = "gameSave.txt";
+
+
 void writeTableToFile(ostream& o, Table *table);
 void writePlayersToFile(ostream& o, Player *playerList, int numberOfPlayers);
 void writeDeckToFile(ostream& o, Deck<AnimalCard> *deck);
 
 
-void writeToFile(string filename,
-                 Table *table,
+void writeToFile(Table *table,
                  Deck<AnimalCard> *deck,
                  Player *playerList,
                  int numberOfPlayers) {
@@ -44,4 +46,52 @@ void writeDeckToFile(ostream& o, Deck<AnimalCard> *deck) {
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////
 
+void readToFile(Table *table,
+                Player **playerList,
+                int &numberOfPlayers) {
+    ifstream file;
+    file.open(filename);
+
+    file >> numberOfPlayers;
+
+    Player *players = new Player[numberOfPlayers];
+    *playerList = players;
+
+    for (int i = 0; i < numberOfPlayers; i++) {
+        string name;
+        string secretAnimal;
+        int numberOfCards;
+
+        getline(file, name);
+        getline(file, name);
+        file >> secretAnimal;
+        file >> numberOfCards;
+
+        players[i].setName(name);
+        players[i].swapSecretAnimal(secretAnimal);
+
+        for (int j = 0; j < numberOfCards; j++) {
+            string cardString;
+            file >> cardString;
+
+            shared_ptr<AnimalCard> card =
+                AnimalCardFactory::createCard(cardString);
+
+            players[i].yourHand += card;
+        }
+    }
+
+    int numberOfDeckCards;
+    file >> numberOfDeckCards;
+
+    for (int i = 0; i < numberOfDeckCards; i++) {
+        string cardString;
+        file >> cardString;
+
+        AnimalCardFactory::getFactory()->addCardToDeck(cardString);
+    }
+
+    file.close();
+}

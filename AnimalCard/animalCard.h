@@ -24,7 +24,7 @@ enum class Animal {
 };
 
 char charForAnimal(Animal animal);
-
+Animal animalForChar(char animal);
 
 class AnimalCard {
 

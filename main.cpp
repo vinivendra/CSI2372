@@ -22,30 +22,48 @@ int main(int argc, const char *argv[]) {
 
     // Game loop
 
-    cout << "How many players are playing? (2-5 players) ";
+    AnimalCardFactory *factory = nullptr;
+    Player *playerList = nullptr;
+    Table *gameBoard = nullptr;
+
     int i = 0;
-    while (i == 0) {
-        cin >> i;
-    }
-    cout << endl;
 
-    AnimalCardFactory *factory = AnimalCardFactory::getFactory();
+    bool shouldReadFromFile = false;
+    cout << "Would you like to load the game from a file? [0/1] ";
+    cin >> shouldReadFromFile;
 
-    Player *playerList = new Player[i];
+    if (shouldReadFromFile) {
+        readToFile(gameBoard, &playerList, i);
+    } else {
+        cout << "How many players are playing? (2-5 players) ";
 
-    string name;
-
-    for (int j = 0; j != i; j++) {
-        cout << "Name of player " << j + 1 << ": ";
-        cin >> name;
-        playerList[j].setName(name);
+        while (i == 0) {
+            cin >> i;
+        }
         cout << endl;
+
+        factory = AnimalCardFactory::getFactory();
+        factory->randomizeDeck();
+
+        playerList = new Player[i];
+
+        string name;
+
+        for (int j = 0; j != i; j++) {
+            playerList[j].setupAndDrawCards();
+
+            cout << "Name of player " << j + 1 << ": ";
+            cin >> name;
+            playerList[j].setName(name);
+            cout << endl;
+        }
+
+        gameBoard = new Table();
     }
-    // Or load from file
+
+    int nbdraws[5] = {0, 0, 0, 0, 0};
 
     bool playerHasWon = false;
-    Table gameBoard = Table();
-    int nbdraws[5]{0, 0, 0, 0, 0};
 
     while (!playerHasWon) {
         // If pause save game to file and exit
@@ -55,7 +73,7 @@ int main(int argc, const char *argv[]) {
 
         if (shouldPause) {
             cout << "Saving information to gameSave.txt..." << endl;
-            writeToFile("gameSave.txt", &gameBoard, &factory->getDeck(), playerList, i);
+            writeToFile(gameBoard, &factory->getDeck(), playerList, i);
             cout << "Game saved sucessfully. Goodbye!" << endl;
             return 0;
         }
@@ -63,7 +81,7 @@ int main(int argc, const char *argv[]) {
         for (int k = 0; k != i; k++) {
 
             cout << "Table: " << endl;
-            gameBoard.print();
+            gameBoard->print();
 
             for (int n = 0; n != nbdraws[k]; n++)
                 playerList[k].yourHand += factory->getDeck().draw();
@@ -111,13 +129,13 @@ int main(int argc, const char *argv[]) {
                             cin >> choiceIsTop;
 
                             if (choiceIsTop) {
-                                gameBoard += actionCard;
+                                *gameBoard += actionCard;
                             } else {
-                                gameBoard -= actionCard;
+                                *gameBoard -= actionCard;
 
                                 actionCard->setGameInfo({k, i});
                                 QueryResult queryResult = actionCard->query();
-                                actionCard->perform(gameBoard,
+                                actionCard->perform(*gameBoard,
                                                     playerList,
                                                     queryResult);
                             }
@@ -131,7 +149,7 @@ int main(int argc, const char *argv[]) {
                     } else {
                         chosenCard->setOrientation((Orientation)orientation);
 
-                        nbdraws[k] = gameBoard.addAt(chosenCard, y, x);
+                        nbdraws[k] = gameBoard->addAt(chosenCard, y, x);
                     }
                 } catch (...) {
                     cout << "Uh oh, invalid play. Try again." << endl;
@@ -146,7 +164,7 @@ int main(int argc, const char *argv[]) {
 
                 string name = playerList[m].getName();
 
-                if (gameBoard.win(name))
+                if (gameBoard->win(name))
                     playerHasWon = true;
             }
         }
