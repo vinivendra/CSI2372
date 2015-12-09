@@ -6,6 +6,7 @@
 #include "../../AnimalCard/startStack.h"
 #include "../AnimalCardFactory/AnimalCardFactory.h"
 #include <memory>
+#include <string>
 
 
 using namespace std;

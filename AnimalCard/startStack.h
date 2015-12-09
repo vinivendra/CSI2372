@@ -6,6 +6,7 @@
 #include "startCard.h"
 
 #include <deque>
+#include <memory>
 
 
 using namespace std;

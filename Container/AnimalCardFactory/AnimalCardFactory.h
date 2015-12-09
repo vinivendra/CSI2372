@@ -4,6 +4,8 @@
 #include "../Deck/deck.h"
 #include "../../AnimalCard/animalCard.h"
 
+#include <string>
+
 class AnimalCardFactory {
     Deck<AnimalCard> deck;
     static AnimalCardFactory* deckFactory;
