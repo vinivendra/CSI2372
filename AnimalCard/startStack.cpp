@@ -6,7 +6,7 @@
 using namespace std;
 
 StartStack::StartStack() {
-    stack.push_back(shared_ptr<NoSplit>(new StartCard()));
+    
 }
 
 void StartStack::print(ostream& o) const {

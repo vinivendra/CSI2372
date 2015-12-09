@@ -56,14 +56,28 @@ int Table::addAt(shared_ptr<AnimalCard> card, int row, int col) {
     if (board[row][col] == 0) {
         int m = nbMatches(card, row, col);
         if (m != 0) {
-            cardBoard[row][col] = card;
-            board[row][col] = 1;
+            insert(card, row, col);
             return m;
         }
     }
 
     throw IllegalPlacement(row, col);
     return 0;
+}
+
+// Forcibly inserting a card on the table
+void Table::insert(shared_ptr<AnimalCard> card, int row, int col) {
+    cardBoard[row][col] = card;
+    board[row][col] = 1;
+
+    if (row < minRow)
+        minRow = row;
+    if (row > maxRow)
+        maxRow = row;
+    if (col < minCol)
+        minCol = col;
+    if (col > maxCol)
+        maxCol = col;
 }
 
 // returning the number of card that match the given one

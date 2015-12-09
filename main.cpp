@@ -22,9 +22,9 @@ int main(int argc, const char *argv[]) {
 
     // Game loop
 
-    AnimalCardFactory *factory = nullptr;
+    AnimalCardFactory *factory = AnimalCardFactory::getFactory();
+    Table *gameBoard = new Table();
     Player *playerList = nullptr;
-    Table *gameBoard = nullptr;
 
     int i = 0;
 
@@ -42,7 +42,6 @@ int main(int argc, const char *argv[]) {
         }
         cout << endl;
 
-        factory = AnimalCardFactory::getFactory();
         factory->randomizeDeck();
 
         playerList = new Player[i];
@@ -58,7 +57,7 @@ int main(int argc, const char *argv[]) {
             cout << endl;
         }
 
-        gameBoard = new Table();
+        *gameBoard += shared_ptr<StartCard>(new StartCard());
     }
 
     int nbdraws[5] = {0, 0, 0, 0, 0};

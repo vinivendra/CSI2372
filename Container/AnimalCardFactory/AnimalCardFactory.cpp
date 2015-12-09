@@ -120,6 +120,9 @@ shared_ptr<AnimalCard> AnimalCardFactory::createCard(string animals) {
         else if (animals.at(0) == charForAnimal(Animal::MOOSE)) {
             newCard = new MooseAction();
         }
+        else if (animals.at(0) == charForAnimal(Animal::ALL)) {
+            newCard = new StartCard();
+        }
     }
 
     else if ((animals.at(0) == animals.at(1) &&

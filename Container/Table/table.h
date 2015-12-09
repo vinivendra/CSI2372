@@ -36,6 +36,7 @@ public:
 
     int nbMatches(shared_ptr<AnimalCard>, int, int);
     int addAt(shared_ptr<AnimalCard>, int row, int col);
+    void insert(shared_ptr<AnimalCard>, int row, int col);
     Table& operator+=(shared_ptr<NoSplit>);
     Table& operator-=(shared_ptr<NoSplit>);
     shared_ptr<AnimalCard> pickAt(int row, int col);

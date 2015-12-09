@@ -93,5 +93,38 @@ void readToFile(Table *table,
         AnimalCardFactory::getFactory()->addCardToDeck(cardString);
     }
 
+    int numberOfStackCards;
+    file >> numberOfStackCards;
+
+    for (int i = 0; i < numberOfStackCards; i++) {
+        string cardString;
+        file >> cardString;
+
+        shared_ptr<AnimalCard> card =
+            AnimalCardFactory::createCard(cardString);
+
+        if (shared_ptr<NoSplit> noSplit =
+                dynamic_pointer_cast<NoSplit>(card)) {
+            *table += noSplit;
+        }
+    }
+
+    while (true) {
+        int x, y;
+        file >> x;
+        file >> y;
+
+        if (file.eof())
+            break;
+
+        string cardString;
+        file >> cardString;
+
+        shared_ptr<AnimalCard> card =
+            AnimalCardFactory::createCard(cardString);
+
+        table->insert(card, x, y);
+    }
+
     file.close();
 }
