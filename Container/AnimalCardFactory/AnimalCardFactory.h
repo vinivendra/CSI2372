@@ -9,6 +9,8 @@ class AnimalCardFactory {
     static AnimalCardFactory* deckFactory;
 
     AnimalCardFactory();
+
+    void addCardToDeck(string animals);
     
 public:
     static AnimalCardFactory* getFactory();
@@ -19,7 +21,21 @@ public:
     Deck<AnimalCard>& getDeck();
 
     static shared_ptr<AnimalCard> createCard(string animals);
-    void addCardToDeck(string animals);
+
+    inline friend istream& operator>>(istream& file,
+                                      AnimalCardFactory& factory) {
+        int numberOfDeckCards;
+        file >> numberOfDeckCards;
+
+        for (int i = 0; i < numberOfDeckCards; i++) {
+            string cardString;
+            file >> cardString;
+
+            factory.addCardToDeck(cardString);
+        }
+
+        return file;
+    }
 };
 
 #endif

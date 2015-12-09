@@ -63,15 +63,7 @@ void readToFile(Table *table,
         file >> players[i];
     }
 
-    int numberOfDeckCards;
-    file >> numberOfDeckCards;
-
-    for (int i = 0; i < numberOfDeckCards; i++) {
-        string cardString;
-        file >> cardString;
-
-        AnimalCardFactory::getFactory()->addCardToDeck(cardString);
-    }
+    file >> *AnimalCardFactory::getFactory();
 
     file >> *table;
 

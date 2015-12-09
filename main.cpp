@@ -34,6 +34,10 @@ int main(int argc, const char *argv[]) {
 
     if (shouldReadFromFile) {
         readToFile(gameBoard, &playerList, i);
+
+        for (int k = 0; k < i; k++) {
+            playerList[k].yourHand += factory->getDeck().draw();
+        }
     } else {
         cout << "How many players are playing? (2-5 players) ";
 
